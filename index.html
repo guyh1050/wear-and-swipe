@@ -688,7 +688,7 @@
     backdrop-filter: blur(4px);
   }
   .outfit-piece.fav::after {
-    content: '⭐';
+    content: '\2605';
     position: absolute;
     top: 4px;
     left: 4px;
@@ -2424,8 +2424,8 @@
 <body>
 
 <div class="mode-bar">
-  <button class="mode-btn active" data-mode="app">📱 אפליקציה</button>
-  <button class="mode-btn" data-mode="admin">⚙️ ניהול קטלוג</button>
+  <button class="mode-btn active" data-mode="app">אפליקציה</button>
+  <button class="mode-btn" data-mode="admin">ניהול קטלוג</button>
 </div>
 
 <!-- APP -->
@@ -2544,42 +2544,34 @@
       <p class="ob-sub">בחר/י עד 3 סגנונות. ככל שתבחר/י יותר, המלצות יהיו ממוקדות יותר.</p>
       <div class="ob-style-grid" id="ob-style-options">
         <button class="ob-style" data-style="casual">
-          <div class="ob-style-emoji">👕</div>
           <div class="ob-style-name">יומיומי</div>
           <div class="ob-style-desc">נוח, פשוט, רלאקס</div>
         </button>
         <button class="ob-style" data-style="streetwear">
-          <div class="ob-style-emoji">🧢</div>
           <div class="ob-style-name">סטריט</div>
           <div class="ob-style-desc">אורבני, גרפי, אווירה</div>
         </button>
         <button class="ob-style" data-style="minimal">
-          <div class="ob-style-emoji">⚪</div>
           <div class="ob-style-name">מינימלי</div>
           <div class="ob-style-desc">נקי, מונוכרום, בסיסי</div>
         </button>
         <button class="ob-style" data-style="elegant">
-          <div class="ob-style-emoji">🥂</div>
           <div class="ob-style-name">אלגנטי</div>
           <div class="ob-style-desc">תפור, מסוגנן, מוקפד</div>
         </button>
         <button class="ob-style" data-style="vintage">
-          <div class="ob-style-emoji">📻</div>
           <div class="ob-style-name">וינטג'</div>
           <div class="ob-style-desc">רטרו, קלאסי, נוסטלגי</div>
         </button>
         <button class="ob-style" data-style="sport">
-          <div class="ob-style-emoji">🏃</div>
           <div class="ob-style-name">ספורט</div>
           <div class="ob-style-desc">אקטיבי, תפקודי, נוח</div>
         </button>
         <button class="ob-style" data-style="bold">
-          <div class="ob-style-emoji">🔥</div>
           <div class="ob-style-name">בולט</div>
           <div class="ob-style-desc">סטייטמנט, חזק, יוצא דופן</div>
         </button>
         <button class="ob-style" data-style="natural">
-          <div class="ob-style-emoji">🌿</div>
           <div class="ob-style-name">טבעי</div>
           <div class="ob-style-desc">אדמתי, פשתן, אורגני</div>
         </button>
@@ -2612,10 +2604,10 @@
     <!-- סרגל סינון לפי קטגוריה — מוצג רק במסך גלה -->
     <div class="category-filter" id="category-filter">
       <button class="cat-pill cat-pill-filters" id="open-filters" onclick="openFiltersModal()">
-        <span class="filter-icon">⚙</span> <span id="filter-badge"></span>
+        <span class="filter-icon">סינון</span> <span id="filter-badge"></span>
       </button>
       <button class="cat-pill active" data-cat="all">הכל</button>
-      <button class="cat-pill" data-cat="shoes">נעליים 👟</button>
+      <button class="cat-pill" data-cat="shoes">נעליים</button>
       <button class="cat-pill" data-cat="tee">טישרטים</button>
       <button class="cat-pill" data-cat="shirt">חולצות</button>
       <button class="cat-pill" data-cat="sweater">סוודרים</button>
@@ -2623,7 +2615,7 @@
       <button class="cat-pill" data-cat="shorts">שורט</button>
       <button class="cat-pill" data-cat="dress">שמלות</button>
       <button class="cat-pill" data-cat="outerwear">ז'קטים</button>
-      <button class="cat-pill" data-cat="accessory">אקססוריז 👜</button>
+      <button class="cat-pill" data-cat="accessory">אקססוריז</button>
     </div>
 
     <main>
@@ -2633,7 +2625,7 @@
         </div>
         <div class="controls">
           <button class="ctrl-btn pass" id="btn-pass" title="לא אוהב/ת">✕</button>
-          <button class="ctrl-btn super" id="btn-super" title="סופר לייק! מועדף">⭐</button>
+          <button class="ctrl-btn super" id="btn-super" title="סופר לייק! מועדף">★</button>
           <button class="ctrl-btn info" id="btn-info" title="פרטים">i</button>
           <button class="ctrl-btn like" id="btn-like" title="לייק">♥</button>
         </div>
@@ -2643,10 +2635,10 @@
       <div class="view" id="view-outfits">
         <div class="outfits-toggle">
           <button class="outfits-tab active" data-outfits-view="suggested" onclick="switchOutfitsView('suggested')">
-            ✨ מומלצים
+            מומלצים
           </button>
           <button class="outfits-tab" data-outfits-view="saved" onclick="switchOutfitsView('saved')">
-            ❤️ שמורים <span class="saved-count" id="saved-outfits-count"></span>
+            שמורים <span class="saved-count" id="saved-outfits-count"></span>
           </button>
         </div>
         <div class="outfits-content" id="outfits-content"></div>
@@ -2663,7 +2655,7 @@
 
           <div class="stats-grid">
             <div class="stat-cell"><div class="num" id="stat-likes">0</div><div class="label">לייקים</div></div>
-            <div class="stat-cell"><div class="num" id="stat-favs">0</div><div class="label">מועדפים ⭐</div></div>
+            <div class="stat-cell"><div class="num" id="stat-favs">0</div><div class="label">מועדפים</div></div>
             <div class="stat-cell"><div class="num" id="stat-passes">0</div><div class="label">פסחתי</div></div>
           </div>
 
@@ -2687,13 +2679,13 @@
           <div class="history-list" id="history-list"></div>
 
           <div class="profile-actions">
-            <button class="profile-action-btn" onclick="showHowItWorks()">💡 איך ה-AI עובד?</button>
-            <button class="profile-action-btn" onclick="exportUserData()">⬇️ ייצוא נתונים</button>
-            <button class="profile-action-btn" onclick="document.getElementById('import-file').click()">⬆️ ייבוא נתונים</button>
-            <button class="profile-action-btn" onclick="logoutUser()">🚪 התנתקות</button>
-            <input type="file" id="import-file" accept="application/json" style="display:none" onchange="importUserData(event)">
+            <button class="profile-action-btn" onclick="showHowItWorks()">איך ה-AI עובד?</button>
+            <button class="profile-action-btn" data-admin-only onclick="exportUserData()">ייצוא נתונים</button>
+            <button class="profile-action-btn" data-admin-only onclick="document.getElementById('import-userdata-file').click()">ייבוא נתונים</button>
+            <button class="profile-action-btn" onclick="logoutUser()">התנתקות</button>
+            <input type="file" id="import-userdata-file" accept="application/json" style="display:none" onchange="importUserData(event)">
           </div>
-          <button class="reset-btn" onclick="resetUserData()">↻ אפס נתוני משתמש</button>
+          <button class="reset-btn" onclick="resetUserData()">אפס נתוני משתמש</button>
         </div>
       </div>
     </main>
@@ -2711,8 +2703,8 @@
         </div>
         <div class="admin-actions">
           <button class="admin-btn primary" onclick="openItemEditor()">+ הוסף פריט</button>
-          <button class="admin-btn" onclick="exportCatalog()">↓ ייצא JSON</button>
-          <button class="admin-btn" onclick="document.getElementById('import-file').click()">↑ ייבא JSON</button>
+          <button class="admin-btn" onclick="exportCatalog()">ייצא JSON</button>
+          <button class="admin-btn" onclick="document.getElementById('import-file').click()">ייבא JSON</button>
           <input type="file" id="import-file" accept="application/json" style="display:none" onchange="importCatalog(event)" />
           <button class="admin-btn danger" onclick="resetCatalog()">⟲ אפס לברירת מחדל</button>
         </div>
@@ -2823,7 +2815,7 @@
       <label>וקטור מאפיינים (16 מימדים)</label>
       <div class="vector-info">
         כל מימד מייצג תכונה ויזואלית בין 0 ל-1. במערכת אמיתית הוקטור היה מחושב על ידי MobileNetV2 מהתמונה.
-        <button class="admin-btn" style="margin-top:8px;font-size:10px;padding:6px 12px" onclick="randomizeVector()">⚄ אקראי</button>
+        <button class="admin-btn" style="margin-top:8px;font-size:10px;padding:6px 12px" onclick="randomizeVector()"> אקראי</button>
       </div>
       <div class="vector-sliders" id="vector-sliders"></div>
     </div>
@@ -2862,7 +2854,7 @@
       <div class="how-num">2</div>
       <div class="how-text">
         <strong>למידה מהסווייפים שלך</strong>
-        כל לייק מוסיף את וקטור הפריט לממוצע המשוקלל של הטעם שלך. סופר-לייק (⭐) שוקל פי 3. ככה הטעם שלך מתגבש עם כל פעולה.
+        כל לייק מוסיף את וקטור הפריט לממוצע המשוקלל של הטעם שלך. סופר-לייק שוקל פי 3. ככה הטעם שלך מתגבש עם כל פעולה.
       </div>
     </div>
 
@@ -2903,21 +2895,17 @@
       <div class="filter-label">מזג אוויר</div>
       <div class="weather-pills">
         <button class="weather-pill active" data-weather="all">
-          <div class="weather-emoji">🌤</div>
           <div class="weather-label">הכל</div>
         </button>
         <button class="weather-pill" data-weather="hot">
-          <div class="weather-emoji">☀️</div>
           <div class="weather-label">חם</div>
           <div class="weather-desc">קצרים, קלים</div>
         </button>
         <button class="weather-pill" data-weather="mild">
-          <div class="weather-emoji">🍃</div>
           <div class="weather-label">ביניים</div>
           <div class="weather-desc">סבירים</div>
         </button>
         <button class="weather-pill" data-weather="cold">
-          <div class="weather-emoji">❄️</div>
           <div class="weather-label">קר</div>
           <div class="weather-desc">ארוכים, חמים</div>
         </button>
@@ -3200,6 +3188,38 @@ const AUTH = (function () {
     countUsers() { return Object.keys(loadUsers()).length; },
   };
 })();
+
+/* ============================================================
+   הרשאות — רק משתמש המנהל רשאי לערוך את הקטלוג
+   ============================================================
+   שם המשתמש המורשה לעריכת פריטים, ייבוא וייצוא הוא 'guy'.
+   הבדיקה מתבצעת לפי שם המשתמש המחובר. (בנוסף, בצד השרת,
+   כללי האבטחה של Firestore מגבילים כתיבה לקטלוג למשתמש זה.)
+   ============================================================ */
+const ADMIN_USERNAME = 'guy';
+function isAdmin() {
+  const u = window.storage._getCurrentUser();
+  return u && u.toLowerCase() === ADMIN_USERNAME;
+}
+// מציג/מסתיר רכיבים המיועדים למנהל בלבד
+function applyAdminVisibility() {
+  const admin = isAdmin();
+  // כפתור ניהול הקטלוג ב-mode-bar
+  const adminModeBtn = document.querySelector('.mode-btn[data-mode="admin"]');
+  if (adminModeBtn) adminModeBtn.style.display = admin ? '' : 'none';
+  // כפתורי ייצוא/ייבוא בפרופיל
+  document.querySelectorAll('[data-admin-only]').forEach(el => {
+    el.style.display = admin ? '' : 'none';
+  });
+  // אם משתמש שאינו מנהל נמצא במסך הניהול — להחזיר אותו לאפליקציה
+  if (!admin) {
+    const adminScreen = document.getElementById('screen-admin');
+    if (adminScreen && adminScreen.classList.contains('active')) {
+      document.querySelectorAll('.mode-btn').forEach(b => b.classList.toggle('active', b.dataset.mode === 'app'));
+      document.querySelectorAll('.screen').forEach(s => s.classList.toggle('active', s.id === 'screen-app'));
+    }
+  }
+}
 
 
 function makeClothingImage(type, palette, accentPalette) {
@@ -69688,7 +69708,7 @@ function buildCardHTML(item, stackPos) {
           </div>
         </div>
       </div>
-      ${stackPos === 0 ? '<div class="stamp stamp-like">LIKE</div><div class="stamp stamp-pass">PASS</div><div class="stamp stamp-super">⭐ SUPER</div>' : ''}
+      ${stackPos === 0 ? '<div class="stamp stamp-like">LIKE</div><div class="stamp stamp-pass">PASS</div><div class="stamp stamp-super">SUPER</div>' : ''}
     </div>
   `;
 }
@@ -70018,14 +70038,14 @@ async function finishSwipe(action) {
     const totalLikes = userState.likedItems.length;
     if (totalLikes === 3) {
       needsRebuild = true;
-      setTimeout(() => showToast('AI התחיל ללמוד את הטעם שלך ✦'), 300);
+      setTimeout(() => showToast('AI התחיל ללמוד את הטעם שלך'), 300);
     } else if (totalLikes > 3 && totalLikes % 5 === 0) {
       needsRebuild = true;
       setTimeout(() => showToast('המלצות עודכנו לפי הסגנון שלך'), 300);
     }
     if (action === 'super') {
       needsRebuild = true; // סופר-לייק תמיד מעדכן
-      setTimeout(() => showToast('⭐ נשמר במועדפים — נמצא לך עוד כאלה'), 300);
+      setTimeout(() => showToast('נשמר במועדפים — נמצא לך עוד כאלה'), 300);
     }
   }
 
@@ -70047,7 +70067,7 @@ async function finishSwipe(action) {
       newTop.insertAdjacentHTML('beforeend',
         '<div class="stamp stamp-like">LIKE</div>' +
         '<div class="stamp stamp-pass">PASS</div>' +
-        '<div class="stamp stamp-super">⭐ SUPER</div>');
+        '<div class="stamp stamp-super">SUPER</div>');
     }
 
     // הוספת כרטיס חדש מאחור (אם יש)
@@ -70272,7 +70292,7 @@ function renderProfile() {
           <div class="name">${item.name}</div>
           <div class="brand">${item.brand}</div>
         </div>
-        <div class="history-action ${h.action}">${h.action === 'like' ? '♥ לייק' : '✕ פסחתי'}</div>
+        <div class="history-action ${h.action}">${h.action === 'like' ? 'לייק' : '✕ פסחתי'}</div>
       </div>
     `;
   }).join('');
@@ -70382,7 +70402,7 @@ function exportUserData() {
   a.click();
   document.body.removeChild(a);
   URL.revokeObjectURL(url);
-  showToast('⬇️ הנתונים יוצאו לקובץ JSON');
+  showToast('הנתונים יוצאו לקובץ JSON');
 }
 
 async function importUserData(event) {
@@ -70415,9 +70435,9 @@ async function importUserData(event) {
     renderDeck();
     updateStats();
     switchTab('profile');
-    showToast('⬆️ הנתונים יובאו בהצלחה');
+    showToast('הנתונים יובאו בהצלחה');
   } catch (err) {
-    showToast('⚠️ שגיאה בייבוא: ' + (err.message || 'קובץ לא תקין'));
+    showToast('שגיאה בייבוא: ' + (err.message || 'קובץ לא תקין'));
   } finally {
     event.target.value = ''; // איפוס כדי לאפשר ייבוא חוזר של אותו קובץ
   }
@@ -70708,6 +70728,11 @@ function importCatalog(event) {
 
 document.querySelectorAll('.mode-btn').forEach(btn => {
   btn.addEventListener('click', () => {
+    // הגנה: רק מנהל רשאי להיכנס למסך ניהול הקטלוג
+    if (btn.dataset.mode === 'admin' && !isAdmin()) {
+      showToast('רק מנהל המערכת רשאי לערוך את הקטלוג');
+      return;
+    }
     document.querySelectorAll('.mode-btn').forEach(b => b.classList.toggle('active', b === btn));
     document.querySelectorAll('.screen').forEach(s => s.classList.toggle('active', s.id === `screen-${btn.dataset.mode}`));
     if (btn.dataset.mode === 'admin') {
@@ -71097,7 +71122,6 @@ function renderOutfits() {
   if (totalLikes < 2) {
     container.innerHTML = `
       <div class="outfits-empty">
-        <div class="outfits-empty-icon">👔</div>
         <h3 style="font-family:'Fraunces',serif;font-size:24px;font-weight:500;margin-bottom:10px">תעשה לפחות 2 לייקים</h3>
         <p style="color:var(--ink-dim);font-size:14px;line-height:1.5;max-width:280px;margin-bottom:24px">
           כדי לבנות שילובים מותאמים אישית, אני צריך לראות לפחות 2 פריטים שאתה אוהב — רצוי מקטגוריות שונות.
@@ -71116,7 +71140,6 @@ function renderOutfits() {
   if (currentOutfits.length === 0) {
     container.innerHTML = `
       <div class="outfits-empty">
-        <div class="outfits-empty-icon">🤔</div>
         <h3 style="font-family:'Fraunces',serif;font-size:24px;font-weight:500;margin-bottom:10px">צריך עוד פריטים</h3>
         <p style="color:var(--ink-dim);font-size:14px;line-height:1.5;max-width:300px">
           הפריטים שאהבת לא מספיקים לבניית שילוב. נסה לאהוב גם חולצה וגם מכנס/חצאית.
@@ -71164,7 +71187,7 @@ function renderOutfits() {
               <button class="outfit-save-btn ${isSaved ? 'saved' : ''}"
                       onclick='toggleSaveOutfit(${JSON.stringify(outfitSig)}, ${idx})'
                       title="${isSaved ? 'הוסר מהמועדפים' : 'שמור אווטפיט'}">
-                ${isSaved ? '❤️ נשמר' : '🤍 שמור'}
+                ${isSaved ? 'נשמר ✓' : 'שמור'}
               </button>
             </div>
           </div>
@@ -71210,7 +71233,7 @@ function shuffleOutfits() {
   // shuffle order slightly
   currentOutfits.sort(() => Math.random() - 0.5);
   renderOutfits();
-  showToast('שילובים חדשים נוצרו ✨');
+  showToast('שילובים חדשים נוצרו');
 }
 
 // === שמירת אווטפיט ===
@@ -71235,7 +71258,7 @@ async function toggleSaveOutfit(sig, idx) {
       score: outfit.score,
       savedAt: Date.now(),
     });
-    showToast('❤️ נשמר לאווטפיטים שלך');
+    showToast('נשמר לאווטפיטים שלך');
   }
   await saveUserState();
   renderOutfits();  // רענן כדי לעדכן את האייקונים
@@ -71261,10 +71284,9 @@ function renderSavedOutfits() {
   if (!userState.savedOutfits || userState.savedOutfits.length === 0) {
     container.innerHTML = `
       <div class="outfits-empty">
-        <div class="outfits-empty-icon">❤️</div>
         <h3 style="font-family:'Fraunces',serif;font-size:24px;font-weight:500;margin-bottom:10px">עוד לא שמרת אווטפיטים</h3>
         <p style="color:var(--ink-dim);font-size:14px;line-height:1.5;max-width:300px;margin-bottom:24px">
-          לך ללשונית "שילובים", מצא אווטפיט שאתה אוהב ולחץ על "🤍 שמור".
+          לך ללשונית "שילובים", מצא אווטפיט שאתה אוהב ולחץ על "שמור".
         </p>
         <button onclick="switchTab('outfits')" style="padding:12px 24px;border:1.5px solid var(--ink);background:var(--ink);color:var(--bg);font-family:'Heebo',sans-serif;font-size:13px;font-weight:500;cursor:pointer;border-radius:100px">
           לשילובים
@@ -71925,6 +71947,9 @@ async function startAppForUser() {
   renderDeck();
   updateStats();
   renderCatalog();
+
+  // החלת הרשאות — הסתרת רכיבי ניהול ממשתמשים שאינם מנהל
+  applyAdminVisibility();
 
   // משתמש חדש (טרם השלים onboarding) → להציג אונבורדינג
   if (!userPrefs.onboardingDone) {
