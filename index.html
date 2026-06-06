@@ -187,6 +187,126 @@
   }
   .onboarding-screen.hidden { display: none; }
 
+  /* ===== מסך אימות (הרשמה/כניסה) ===== */
+  .auth-screen {
+    position: fixed;
+    inset: 0;
+    background: var(--bg);
+    z-index: 400;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow-y: auto;
+    padding: 32px 24px;
+  }
+  .auth-screen.hidden { display: none; }
+  .auth-box {
+    width: 100%;
+    max-width: 380px;
+    text-align: center;
+  }
+  .auth-logo {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 40px;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+  .auth-logo span { color: var(--accent); }
+  .auth-tagline {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 16px;
+    color: var(--ink-dim);
+    margin-bottom: 36px;
+  }
+  .auth-tabs {
+    display: flex;
+    gap: 4px;
+    background: var(--bg-2);
+    border-radius: 100px;
+    padding: 4px;
+    margin-bottom: 28px;
+  }
+  .auth-tab {
+    flex: 1;
+    padding: 11px;
+    border: none;
+    background: transparent;
+    color: var(--ink-dim);
+    font-family: 'Heebo', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 100px;
+    transition: all 0.2s;
+  }
+  .auth-tab.active { background: var(--ink); color: #fff; }
+  .auth-field { margin-bottom: 16px; text-align: right; }
+  .auth-label {
+    display: block;
+    font-size: 12px;
+    color: var(--ink-dim);
+    margin-bottom: 6px;
+    font-weight: 500;
+  }
+  .auth-input {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1.5px solid var(--line);
+    background: var(--bg);
+    border-radius: 12px;
+    font-family: 'Heebo', sans-serif;
+    font-size: 16px;
+    color: var(--ink);
+    text-align: right;
+    box-sizing: border-box;
+    transition: border-color 0.2s;
+  }
+  .auth-input:focus { outline: none; border-color: var(--accent); }
+  .auth-submit {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    background: var(--ink);
+    color: #fff;
+    font-family: 'Heebo', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 100px;
+    margin-top: 8px;
+    transition: all 0.2s;
+  }
+  .auth-submit:hover { background: var(--accent); }
+  .auth-error {
+    color: var(--accent);
+    font-size: 13px;
+    margin-top: 14px;
+    min-height: 18px;
+    font-weight: 500;
+  }
+  .auth-remember {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-bottom: 8px;
+    font-size: 13px;
+    color: var(--ink-dim);
+    cursor: pointer;
+  }
+  .auth-remember input { width: 16px; height: 16px; accent-color: var(--accent); cursor: pointer; }
+  .auth-note {
+    font-size: 11px;
+    color: var(--ink-dim);
+    margin-top: 24px;
+    line-height: 1.6;
+    opacity: 0.8;
+  }
+
   .ob-progress {
     padding: 22px 24px 0;
     display: flex;
@@ -2263,6 +2383,43 @@
   .btn-apply-filters:hover { background: var(--accent); }
 
 </style>
+
+<!-- ============================================================
+     FIREBASE SDK — מסד נתונים אמיתי בענן (Authentication + Firestore)
+     ============================================================ -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script>
+  // קונפיגורציית פרויקט Firebase של גיא חזן (swip-and-wear)
+  // הערה: מפתח ה-API חשוף בכוונה בצד-לקוח (תקני ב-Firebase);
+  // האבטחה נאכפת דרך Security Rules ב-Firestore.
+  const firebaseConfig = {
+    apiKey: "AIzaSyBROOpM-GyzNSBEKahtFNyz0viSBZIwrOs",
+    authDomain: "swip-and-wear.firebaseapp.com",
+    projectId: "swip-and-wear",
+    storageBucket: "swip-and-wear.firebasestorage.app",
+    messagingSenderId: "359168068258",
+    appId: "1:359168068258:web:59d837551e1374f25765fb",
+    measurementId: "G-LMM262VTF8"
+  };
+
+  // אתחול בטוח — אם ה-SDK לא נטען (אופליין), האפליקציה תיפול חזרה ל-localStorage
+  window.FB = { ready: false, auth: null, db: null };
+  try {
+    if (window.firebase && firebase.initializeApp) {
+      firebase.initializeApp(firebaseConfig);
+      window.FB.auth = firebase.auth();
+      window.FB.db = firebase.firestore();
+      window.FB.ready = true;
+      // התמדה של ההתחברות בין סשנים (remember me)
+      try { window.FB.auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL); } catch (e) {}
+    }
+  } catch (e) {
+    console.warn('Firebase init failed, falling back to local storage:', e);
+    window.FB.ready = false;
+  }
+</script>
 </head>
 <body>
 
@@ -2272,6 +2429,45 @@
 </div>
 
 <!-- APP -->
+<!-- AUTH — מסך הרשמה / כניסה (המסך הראשון) -->
+<div class="auth-screen" id="auth-screen">
+  <div class="auth-box">
+    <div class="auth-logo">Wear<span>&amp;</span>Swipe</div>
+    <div class="auth-tagline">הסטייל שלך, לומד אותך</div>
+
+    <div class="auth-tabs">
+      <button class="auth-tab active" id="auth-tab-login" onclick="switchAuthTab('login')">כניסה</button>
+      <button class="auth-tab" id="auth-tab-register" onclick="switchAuthTab('register')">הרשמה</button>
+    </div>
+
+    <div class="auth-field">
+      <label class="auth-label" for="auth-username">שם משתמש</label>
+      <input class="auth-input" id="auth-username" type="text" autocomplete="username" placeholder="הקלד/י שם משתמש">
+    </div>
+    <div class="auth-field">
+      <label class="auth-label" for="auth-password">סיסמה</label>
+      <input class="auth-input" id="auth-password" type="password" autocomplete="current-password" placeholder="הקלד/י סיסמה">
+    </div>
+    <div class="auth-field" id="auth-confirm-field" style="display:none">
+      <label class="auth-label" for="auth-confirm">אימות סיסמה</label>
+      <input class="auth-input" id="auth-confirm" type="password" autocomplete="new-password" placeholder="הקלד/י שוב את הסיסמה">
+    </div>
+
+    <label class="auth-remember">
+      <span>זכור אותי במכשיר זה</span>
+      <input type="checkbox" id="auth-remember" checked>
+    </label>
+
+    <button class="auth-submit" id="auth-submit" onclick="submitAuth()">כניסה</button>
+    <div class="auth-error" id="auth-error"></div>
+
+    <div class="auth-note">
+      החשבון נשמר באופן מקומי בדפדפן זה בלבד. כל משתמש מקבל מסד-נתונים אישי
+      הזוכר את הסווייפים, ההעדפות ווקטור הטעם שלו.
+    </div>
+  </div>
+</div>
+
 <!-- ONBOARDING — מסכי העדפות מקדימים -->
 <div class="onboarding-screen" id="onboarding-screen">
   <div class="ob-progress">
@@ -2494,6 +2690,7 @@
             <button class="profile-action-btn" onclick="showHowItWorks()">💡 איך ה-AI עובד?</button>
             <button class="profile-action-btn" onclick="exportUserData()">⬇️ ייצוא נתונים</button>
             <button class="profile-action-btn" onclick="document.getElementById('import-file').click()">⬆️ ייבוא נתונים</button>
+            <button class="profile-action-btn" onclick="logoutUser()">🚪 התנתקות</button>
             <input type="file" id="import-file" accept="application/json" style="display:none" onchange="importUserData(event)">
           </div>
           <button class="reset-btn" onclick="resetUserData()">↻ אפס נתוני משתמש</button>
@@ -2789,10 +2986,221 @@
 
 <script>
 /* ============================================================
-   IMAGE GENERATION — תמונות SVG מובנות שתמיד עובדות
-   במקום תלות ב-Unsplash, אנחנו יוצרים אילוסטרציות SVG ייחודיות
-   לכל פריט בגד. כל תמונה נוצרת מקודדת ב-data URL.
+   STORAGE LAYER — שכבת אחסון מבוססת localStorage
+   ============================================================
+   האפליקציה רצה כקובץ HTML עצמאי (למשל ב-GitHub Pages) ללא שרת.
+   שכבה זו מספקת ממשק אחיד (async get/set/delete/list) מעל
+   localStorage של הדפדפן, עם הפרדת מרחב-שמות (namespace) לכל
+   משתמש שמחובר. כך כל משתמש מקבל מסד-נתונים אישי משלו.
+   הממשק זהה ל-API המקורי כך ששאר הקוד עובד ללא שינוי.
    ============================================================ */
+(function initStorageLayer() {
+  const PREFIX = 'wns:';            // wear-and-swipe namespace כללי
+  let currentUser = null;           // שם המשתמש המחובר כעת
+
+  // מפתח מלא: נתונים אישיים מקבלים תחילית לפי המשתמש,
+  // נתונים גלובליים (כמו הקטלוג) משותפים לכל המשתמשים.
+  const GLOBAL_KEYS = ['catalog', 'catalog_version'];
+  // מפתחות אישיים שיישמרו בענן (Firestore) כאשר המשתמש מחובר
+  const CLOUD_KEYS = ['user_state', 'user_prefs'];
+
+  function fullKey(key) {
+    if (GLOBAL_KEYS.includes(key)) return PREFIX + 'global:' + key;
+    const user = currentUser || '_guest';
+    return PREFIX + 'user:' + user + ':' + key;
+  }
+
+  function cloudActive() {
+    return window.FB && window.FB.ready && window.FB.db && window.FB.auth && window.FB.auth.currentUser;
+  }
+  // מסמך Firestore: users/{uid}
+  function userDoc() {
+    return window.FB.db.collection('users').doc(window.FB.auth.currentUser.uid);
+  }
+
+  window.storage = {
+    get: async (key) => {
+      // נתונים אישיים בענן
+      if (CLOUD_KEYS.includes(key) && cloudActive()) {
+        try {
+          const snap = await userDoc().get();
+          if (snap.exists) {
+            const data = snap.data();
+            if (data && data[key] !== undefined && data[key] !== null) {
+              return { value: data[key] };  // מאוחסן כמחרוזת JSON
+            }
+          }
+          return null;
+        } catch (e) {
+          console.warn('Firestore get failed, using local:', e);
+          // נפילה ל-localStorage
+        }
+      }
+      try {
+        const v = localStorage.getItem(fullKey(key));
+        return v === null ? null : { value: v };
+      } catch (e) { return null; }
+    },
+    set: async (key, value) => {
+      // נתונים אישיים בענן + שמירה מקומית כגיבוי
+      if (CLOUD_KEYS.includes(key) && cloudActive()) {
+        try {
+          await userDoc().set({ [key]: value, updatedAt: Date.now() }, { merge: true });
+        } catch (e) {
+          console.warn('Firestore set failed, saved locally:', e);
+        }
+      }
+      try {
+        localStorage.setItem(fullKey(key), value);
+        return { value };
+      } catch (e) {
+        console.error('storage.set failed', e);
+        return { value };
+      }
+    },
+    delete: async (key) => {
+      if (CLOUD_KEYS.includes(key) && cloudActive()) {
+        try { await userDoc().update({ [key]: firebase.firestore.FieldValue.delete() }); } catch (e) {}
+      }
+      try {
+        localStorage.removeItem(fullKey(key));
+        return { deleted: true };
+      } catch (e) { return { deleted: false }; }
+    },
+    list: async (prefix) => {
+      const out = [];
+      try {
+        const base = PREFIX + 'user:' + (currentUser || '_guest') + ':';
+        for (let i = 0; i < localStorage.length; i++) {
+          const k = localStorage.key(i);
+          if (k && k.startsWith(base)) out.push(k.slice(base.length));
+        }
+      } catch (e) {}
+      return { keys: out };
+    },
+    // ניהול המשתמש הפעיל (משמש את שכבת האימות)
+    _setCurrentUser: (username) => { currentUser = username; },
+    _getCurrentUser: () => currentUser,
+  };
+})();
+
+/* ============================================================
+   AUTH LAYER — שכבת הרשמה והתחברות
+   ============================================================
+   משתמשת ב-Firebase Authentication (אימות אמיתי בענן) כאשר זמין.
+   המשתמש נרשם עם שם משתמש + סיסמה; שם המשתמש מומר לכתובת
+   פנימית מהצורה username@wns.app עבור Firebase Auth, כך שחווית
+   המשתמש פשוטה (שם משתמש בלבד) אך האימות מנוהל בשרת מאובטח של Google.
+   אם Firebase אינו זמין (אופליין) — נפילה למערכת מקומית (localStorage)
+   עם גיבוב SHA-256, כך שהאפליקציה תמיד עובדת.
+   ============================================================ */
+const AUTH = (function () {
+  const USERS_KEY = 'wns:auth:users';        // fallback מקומי
+  const SESSION_KEY = 'wns:auth:session';
+  const DOMAIN = '@wns.app';                 // סיומת פנימית לשם המשתמש
+
+  function useFirebase() { return window.FB && window.FB.ready && window.FB.auth; }
+
+  // ---- כתובת פנימית משם משתמש ----
+  function toEmail(username) {
+    return (username || '').trim().toLowerCase().replace(/\s+/g, '_') + DOMAIN;
+  }
+
+  // ---- fallback מקומי ----
+  function loadUsers() {
+    try { return JSON.parse(localStorage.getItem(USERS_KEY) || '{}'); }
+    catch (e) { return {}; }
+  }
+  function saveUsers(users) { localStorage.setItem(USERS_KEY, JSON.stringify(users)); }
+  async function hashPassword(password) {
+    const data = new TextEncoder().encode(password + ':wns-salt-v1');
+    const buf = await crypto.subtle.digest('SHA-256', data);
+    return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
+  }
+
+  // המרת קודי שגיאה של Firebase להודעות בעברית
+  function fbError(e) {
+    const code = e && e.code ? e.code : '';
+    const map = {
+      'auth/email-already-in-use': 'שם המשתמש כבר תפוס — נסה/י להתחבר',
+      'auth/invalid-email': 'שם המשתמש מכיל תווים לא חוקיים',
+      'auth/weak-password': 'הסיסמה חלשה מדי (לפחות 6 תווים)',
+      'auth/user-not-found': 'שם המשתמש לא נמצא',
+      'auth/wrong-password': 'סיסמה שגויה',
+      'auth/invalid-credential': 'שם משתמש או סיסמה שגויים',
+      'auth/network-request-failed': 'אין חיבור לאינטרנט — נסה/י שוב',
+      'auth/too-many-requests': 'יותר מדי ניסיונות — נסה/י מאוחר יותר',
+    };
+    return map[code] || (e && e.message) || 'שגיאה לא ידועה';
+  }
+
+  return {
+    isCloud() { return !!useFirebase(); },
+
+    async register(username, password) {
+      username = (username || '').trim();
+      if (username.length < 2) throw new Error('שם המשתמש חייב להכיל לפחות 2 תווים');
+      if ((password || '').length < 6) throw new Error('הסיסמה חייבת להכיל לפחות 6 תווים');
+
+      if (useFirebase()) {
+        try {
+          const cred = await window.FB.auth.createUserWithEmailAndPassword(toEmail(username), password);
+          // נשמור את שם התצוגה
+          try { await cred.user.updateProfile({ displayName: username }); } catch (e) {}
+          return username;
+        } catch (e) { throw new Error(fbError(e)); }
+      }
+
+      // fallback מקומי
+      const users = loadUsers();
+      const key = username.toLowerCase();
+      if (users[key]) throw new Error('שם המשתמש כבר תפוס — נסה/י להתחבר');
+      users[key] = { username, passwordHash: await hashPassword(password), createdAt: new Date().toISOString() };
+      saveUsers(users);
+      return username;
+    },
+
+    async login(username, password) {
+      username = (username || '').trim();
+      if (useFirebase()) {
+        try {
+          await window.FB.auth.signInWithEmailAndPassword(toEmail(username), password);
+          return username;
+        } catch (e) { throw new Error(fbError(e)); }
+      }
+      // fallback מקומי
+      const users = loadUsers();
+      const user = users[username.toLowerCase()];
+      if (!user) throw new Error('שם המשתמש לא נמצא');
+      const hash = await hashPassword(password);
+      if (hash !== user.passwordHash) throw new Error('סיסמה שגויה');
+      return user.username;
+    },
+
+    setSession(username) {
+      // Firebase מנהל את ה-persistence בעצמו; שומרים גם מקומית עבור fallback ושם תצוגה
+      localStorage.setItem(SESSION_KEY, username);
+      window.storage._setCurrentUser(username);
+    },
+    getSession() {
+      const u = localStorage.getItem(SESSION_KEY);
+      if (u) window.storage._setCurrentUser(u);
+      return u;
+    },
+    async logout() {
+      if (useFirebase()) { try { await window.FB.auth.signOut(); } catch (e) {} }
+      localStorage.removeItem(SESSION_KEY);
+      window.storage._setCurrentUser(null);
+    },
+    userExists(username) {
+      // רק עבור fallback מקומי; ב-Firebase לא ניתן/נחוץ לבדוק מראש
+      const users = loadUsers();
+      return !!users[(username || '').trim().toLowerCase()];
+    },
+    countUsers() { return Object.keys(loadUsers()).length; },
+  };
+})();
+
 
 function makeClothingImage(type, palette, accentPalette) {
   // type: 'tee', 'shirt', 'blazer', 'jacket', 'dress', 'skirt', 'pants', 'sweater', 'coat', 'vest'
@@ -71309,10 +71717,13 @@ function updateFinishButtonState() {
   const selectedStyles = document.querySelectorAll('#ob-style-options .ob-style.selected');
   // כפתור הסיום פעיל רק אחרי בחירה של לפחות סגנון אחד (אבל גם אפשר בלי)
   finishBtn.classList.add('ready'); // תמיד פעיל - גם 0 סטיילים זה בסדר
-  if (selectedStyles.length === 0) {
+  const n = selectedStyles.length;
+  if (n === 0) {
     finishBtn.textContent = 'דלג ועבור לסווייפ ←';
+  } else if (n === 1) {
+    finishBtn.textContent = 'סיים עם סגנון אחד ←';
   } else {
-    finishBtn.textContent = `סיים עם ${selectedStyles.length} סגנון${selectedStyles.length > 1 ? 'ות' : ''} ←`;
+    finishBtn.textContent = `סיים עם ${n} סגנונות ←`;
   }
 }
 
@@ -71417,19 +71828,156 @@ document.querySelectorAll('#ob-style-options .ob-style').forEach(btn => {
   });
 });
 
-(async function init() {
-  await loadCatalog();
+/* ============================================================
+   AUTH UI — לוגיקת מסך ההרשמה/כניסה
+   ============================================================ */
+let authMode = 'login';   // 'login' | 'register'
+
+function switchAuthTab(mode) {
+  authMode = mode;
+  document.getElementById('auth-tab-login').classList.toggle('active', mode === 'login');
+  document.getElementById('auth-tab-register').classList.toggle('active', mode === 'register');
+  document.getElementById('auth-confirm-field').style.display = mode === 'register' ? 'block' : 'none';
+  document.getElementById('auth-submit').textContent = mode === 'register' ? 'יצירת חשבון' : 'כניסה';
+  document.getElementById('auth-error').textContent = '';
+  document.getElementById('auth-password').setAttribute('autocomplete', mode === 'register' ? 'new-password' : 'current-password');
+}
+
+async function submitAuth() {
+  const username = document.getElementById('auth-username').value.trim();
+  const password = document.getElementById('auth-password').value;
+  const errEl = document.getElementById('auth-error');
+  const submitBtn = document.getElementById('auth-submit');
+  errEl.textContent = '';
+
+  // מניעת לחיצה כפולה
+  submitBtn.disabled = true;
+  const origText = submitBtn.textContent;
+  submitBtn.textContent = '...';
+
+  try {
+    let finalName;
+    if (authMode === 'register') {
+      const confirm = document.getElementById('auth-confirm').value;
+      if (password !== confirm) throw new Error('הסיסמאות אינן תואמות');
+      finalName = await AUTH.register(username, password);
+      // אחרי הרשמה בענן — Firebase מחבר אוטומטית; אם מקומי — נתחבר ידנית
+      if (!AUTH.isCloud()) {
+        window.storage._setCurrentUser(finalName);
+        AUTH.setSession(finalName);
+        await startAppForUser();
+      } else {
+        window.storage._setCurrentUser(finalName);
+        AUTH.setSession(finalName);
+        await startAppForUser();
+      }
+    } else {
+      finalName = await AUTH.login(username, password);
+      window.storage._setCurrentUser(finalName);
+      AUTH.setSession(finalName);
+      await startAppForUser();
+    }
+  } catch (e) {
+    errEl.textContent = e.message || 'שגיאה';
+  } finally {
+    submitBtn.disabled = false;
+    submitBtn.textContent = origText;
+  }
+}
+
+function showAuthScreen() {
+  document.getElementById('auth-screen').classList.remove('hidden');
+  // במצב ענן — נתחיל בכניסה (משתמש חוזר); במצב מקומי — לפי מספר המשתמשים
+  const startTab = AUTH.isCloud() ? 'login' : (AUTH.countUsers() > 0 ? 'login' : 'register');
+  switchAuthTab(startTab);
+}
+
+function hideAuthScreen() {
+  document.getElementById('auth-screen').classList.add('hidden');
+}
+
+async function logoutUser() {
+  // שמירה אחרונה לפני יציאה
+  try { await saveUserState(); await saveUserPrefs(); } catch (e) {}
+  await AUTH.logout();
+  // איפוס ה-state בזיכרון
+  userState = { userVector: null, likedItems: [], passedItems: [], favoriteItems: [], savedOutfits: [], history: [], currentIndex: 0, queue: [] };
+  userPrefs = { name: 'גיא', gender: null, topSize: null, bottomSize: null, shoeSize: null, styles: [], onboardingDone: false };
+  // ניקוי שדות הטופס
+  document.getElementById('auth-username').value = '';
+  document.getElementById('auth-password').value = '';
+  const cf = document.getElementById('auth-confirm'); if (cf) cf.value = '';
+  showAuthScreen();
+}
+
+// טעינת האפליקציה עבור המשתמש המחובר
+async function startAppForUser() {
+  hideAuthScreen();
   await loadUserState();
   await loadUserPrefs();
+  // אם אין שם בהעדפות — נשתמש בשם המשתמש כברירת מחדל
+  const currentUser = window.storage._getCurrentUser();
+  if (currentUser && (!userPrefs.name || userPrefs.name === 'גיא')) {
+    userPrefs.name = currentUser;
+  }
   document.querySelector('.app').setAttribute('data-active-view', 'swipe');
   buildQueue();
   renderDeck();
   updateStats();
   renderCatalog();
 
-  // אם זו פעם ראשונה — להציג onboarding
+  // משתמש חדש (טרם השלים onboarding) → להציג אונבורדינג
   if (!userPrefs.onboardingDone) {
     showOnboarding();
+  } else {
+    hideOnboarding();
+  }
+}
+
+function bindAuthEnter() {
+  ['auth-username', 'auth-password', 'auth-confirm'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el && !el._enterBound) {
+      el._enterBound = true;
+      el.addEventListener('keydown', (e) => { if (e.key === 'Enter') submitAuth(); });
+    }
+  });
+}
+
+(async function init() {
+  // הקטלוג משותף לכל המשתמשים — נטען פעם אחת
+  await loadCatalog();
+  renderCatalog();
+  bindAuthEnter();
+
+  if (AUTH.isCloud()) {
+    // ===== מצב ענן (Firebase) =====
+    // נשתמש ב-onAuthStateChanged רק כדי לטפל במצב ההתחלתי:
+    // אם המשתמש כבר מחובר (מסשן קודם) — כניסה אוטומטית.
+    // התחברות/הרשמה ידנית מטופלות ישירות ב-submitAuth.
+    let initialAuthHandled = false;
+    window.FB.auth.onAuthStateChanged(async (user) => {
+      if (initialAuthHandled) return;   // רק הפעם הראשונה
+      initialAuthHandled = true;
+      if (user) {
+        const displayName = user.displayName || (user.email ? user.email.split('@')[0] : 'משתמש');
+        window.storage._setCurrentUser(displayName);
+        AUTH.setSession(displayName);
+        await startAppForUser();
+      } else {
+        showAuthScreen();
+      }
+    });
+  } else {
+    // ===== מצב מקומי (fallback) =====
+    const session = AUTH.getSession();
+    if (session && AUTH.userExists(session)) {
+      window.storage._setCurrentUser(session);
+      await startAppForUser();
+    } else {
+      await AUTH.logout();
+      showAuthScreen();
+    }
   }
 })();
 </script>
