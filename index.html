@@ -69663,7 +69663,6 @@ function refillPool() {
     userState.passedItems = [];
   }
 
-  showToast('כל הפריטים נראו — מציג שוב את אלו שאולי תרצה לשקול');
   return pool;
 }
 
@@ -70103,14 +70102,11 @@ async function finishSwipe(action) {
     const totalLikes = userState.likedItems.length;
     if (totalLikes === 3) {
       needsRebuild = true;
-      setTimeout(() => showToast('AI התחיל ללמוד את הטעם שלך'), 300);
     } else if (totalLikes > 3 && totalLikes % 5 === 0) {
       needsRebuild = true;
-      setTimeout(() => showToast('המלצות עודכנו לפי הסגנון שלך'), 300);
     }
     if (action === 'super') {
       needsRebuild = true;
-      setTimeout(() => showToast('נשמר במועדפים — נמצא לך עוד כאלה'), 300);
     }
   }
 
@@ -71927,7 +71923,6 @@ async function finishOnboarding() {
   hideOnboarding();
   buildQueue();
   renderDeck();
-  showToast(userPrefs.name ? `שלום ${userPrefs.name}! מתחילים לסווייפ ✦` : 'מתחילים לסווייפ ✦');
 }
 
 // === Listeners ===
