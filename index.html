@@ -135,17 +135,45 @@
   }
 
   /* === Category filter pills === */
+  .category-filter-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background: var(--bg);
+    border-bottom: 1px solid var(--line);
+    z-index: 10;
+  }
+  /* כפתור הסינון קבוע בצד ימין (RTL) ולא נגלל */
+  .category-filter-wrap .cat-pill-filters {
+    flex-shrink: 0;
+    margin: 0 24px 0 12px;
+    order: -1;
+    z-index: 12;
+    position: relative;
+  }
+  /* אינדיקציית גלילה — הצללה בקצה השמאלי שמרמזת שיש עוד קטגוריות */
+  .category-filter-wrap::after {
+    content: '';
+    position: absolute;
+    top: 0; bottom: 0; left: 0;
+    width: 36px;
+    background: linear-gradient(to left, var(--bg), transparent);
+    pointer-events: none;
+    z-index: 11;
+  }
   .category-filter {
     display: flex;
     gap: 8px;
-    padding: 12px 24px;
+    padding: 12px 0 12px 24px;
     overflow-x: auto;
     background: var(--bg);
-    border-bottom: 1px solid var(--line);
     scrollbar-width: none;
     -ms-overflow-style: none;
     position: relative;
     z-index: 10;
+    flex: 1;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
   }
   .category-filter::-webkit-scrollbar { display: none; }
   .cat-pill {
@@ -172,8 +200,8 @@
     border-color: var(--ink);
   }
   /* הסתרת סרגל הקטגוריות בפרופיל ובאוטפיט */
-  .app[data-active-view="profile"] .category-filter,
-  .app[data-active-view="outfits"] .category-filter { display: none; }
+  .app[data-active-view="profile"] .category-filter-wrap,
+  .app[data-active-view="outfits"] .category-filter-wrap { display: none; }
 
   /* ============ ONBOARDING ============ */
   .onboarding-screen {
@@ -1264,6 +1292,14 @@
   .ctrl-btn.like { border-color: var(--green); color: var(--green); width: 64px; height: 64px; }
   .ctrl-btn.like:hover:not(:disabled) { background: var(--green); color: var(--bg); }
   .ctrl-btn.info { width: 44px; height: 44px; font-size: 14px; }
+  .ctrl-btn.undo {
+    width: 44px;
+    height: 44px;
+    font-size: 18px;
+    border-color: var(--ink-dim);
+    color: var(--ink-dim);
+  }
+  .ctrl-btn.undo:hover:not(:disabled) { background: var(--ink-dim); color: var(--bg); }
   .ctrl-btn.super {
     border-color: #f5b400;
     color: #f5b400;
@@ -2204,41 +2240,55 @@
   }
 
   /* Price range slider */
-  .price-range-wrap {
-    position: relative;
-    height: 32px;
-    padding: 12px 0;
+  .price-inputs {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 14px;
   }
-  .price-track {
-    position: absolute;
-    top: 50%;
-    left: 0; right: 0;
-    height: 4px;
-    background: var(--line);
-    border-radius: 100px;
-    transform: translateY(-50%);
-    pointer-events: none;
+  .price-input-group {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    border: 1.5px solid var(--line);
+    border-radius: 10px;
+    padding: 8px 12px;
+    background: var(--bg);
   }
-  .price-track-fill {
-    position: absolute;
-    height: 100%;
-    background: var(--accent);
-    border-radius: 100px;
-    pointer-events: none;
+  .price-input-group:focus-within { border-color: var(--accent); }
+  .price-input-group label {
+    font-size: 12px;
+    color: var(--ink-dim);
+    font-weight: 600;
   }
-  .price-slider {
-    position: absolute;
+  .price-input-group input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    font-family: 'Heebo', sans-serif;
+    font-size: 15px;
+    color: var(--ink);
+    width: 100%;
+    text-align: center;
+    outline: none;
+    -moz-appearance: textfield;
+  }
+  .price-input-group input::-webkit-outer-spin-button,
+  .price-input-group input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+  .price-input-group span { color: var(--ink-dim); font-size: 13px; }
+  .price-slider-single-wrap { padding: 4px 2px; }
+  .price-slider-single {
     width: 100%;
     height: 4px;
-    background: transparent;
+    border-radius: 100px;
+    background: var(--line);
     -webkit-appearance: none;
     appearance: none;
-    pointer-events: none;
+    cursor: pointer;
     margin: 0;
-    top: 50%;
-    transform: translateY(-50%);
+    direction: ltr;
   }
-  .price-slider::-webkit-slider-thumb {
+  .price-slider-single::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
     width: 22px;
@@ -2247,17 +2297,15 @@
     background: var(--ink);
     border: 3px solid var(--bg);
     cursor: pointer;
-    pointer-events: auto;
     box-shadow: 0 2px 8px rgba(0,0,0,0.2);
   }
-  .price-slider::-moz-range-thumb {
+  .price-slider-single::-moz-range-thumb {
     width: 22px;
     height: 22px;
     border-radius: 50%;
     background: var(--ink);
     border: 3px solid var(--bg);
     cursor: pointer;
-    pointer-events: auto;
     box-shadow: 0 2px 8px rgba(0,0,0,0.2);
   }
 
@@ -2602,20 +2650,22 @@
     </div>
 
     <!-- סרגל סינון לפי קטגוריה — מוצג רק במסך גלה -->
-    <div class="category-filter" id="category-filter">
+    <div class="category-filter-wrap" id="category-filter-wrap">
+      <div class="category-filter" id="category-filter">
+        <button class="cat-pill active" data-cat="all">הכל</button>
+        <button class="cat-pill" data-cat="shoes">נעליים</button>
+        <button class="cat-pill" data-cat="tee">טישרטים</button>
+        <button class="cat-pill" data-cat="shirt">חולצות</button>
+        <button class="cat-pill" data-cat="sweater">סוודרים</button>
+        <button class="cat-pill" data-cat="pants">מכנסיים</button>
+        <button class="cat-pill" data-cat="shorts">שורט</button>
+        <button class="cat-pill" data-cat="dress">שמלות</button>
+        <button class="cat-pill" data-cat="outerwear">ז'קטים</button>
+        <button class="cat-pill" data-cat="accessory">אקססוריז</button>
+      </div>
       <button class="cat-pill cat-pill-filters" id="open-filters" onclick="openFiltersModal()">
         <span class="filter-icon">סינון</span> <span id="filter-badge"></span>
       </button>
-      <button class="cat-pill active" data-cat="all">הכל</button>
-      <button class="cat-pill" data-cat="shoes">נעליים</button>
-      <button class="cat-pill" data-cat="tee">טישרטים</button>
-      <button class="cat-pill" data-cat="shirt">חולצות</button>
-      <button class="cat-pill" data-cat="sweater">סוודרים</button>
-      <button class="cat-pill" data-cat="pants">מכנסיים</button>
-      <button class="cat-pill" data-cat="shorts">שורט</button>
-      <button class="cat-pill" data-cat="dress">שמלות</button>
-      <button class="cat-pill" data-cat="outerwear">ז'קטים</button>
-      <button class="cat-pill" data-cat="accessory">אקססוריז</button>
     </div>
 
     <main>
@@ -2624,6 +2674,7 @@
           <div class="deck" id="deck"></div>
         </div>
         <div class="controls">
+          <button class="ctrl-btn undo" id="btn-undo" title="חזור למוצר הקודם" onclick="undoSwipe()">↩</button>
           <button class="ctrl-btn pass" id="btn-pass" title="לא אוהב/ת">✕</button>
           <button class="ctrl-btn super" id="btn-super" title="סופר לייק! מועדף">★</button>
           <button class="ctrl-btn info" id="btn-info" title="פרטים">i</button>
@@ -2915,11 +2966,22 @@
     <!-- מחיר -->
     <div class="filter-section">
       <div class="filter-label">טווח מחירים: <span id="price-range-display">₪0 - ₪1000+</span></div>
-      <div class="price-range-wrap">
-        <input type="range" id="price-min" class="price-slider" min="0" max="1000" step="10" value="0" oninput="updatePriceRange()" />
-        <input type="range" id="price-max" class="price-slider" min="0" max="1000" step="10" value="1000" oninput="updatePriceRange()" />
-        <div class="price-track"><div class="price-track-fill" id="price-track-fill"></div></div>
+      <div class="price-inputs">
+        <div class="price-input-group">
+          <label>מ-</label>
+          <input type="number" id="price-min-input" min="0" max="1000" step="10" value="0" inputmode="numeric" oninput="onPriceInputChange()" />
+          <span>₪</span>
+        </div>
+        <div class="price-input-group">
+          <label>עד</label>
+          <input type="number" id="price-max-input" min="0" max="1000" step="10" value="1000" inputmode="numeric" oninput="onPriceInputChange()" />
+          <span>₪</span>
+        </div>
       </div>
+      <div class="price-slider-single-wrap">
+        <input type="range" id="price-max" class="price-slider-single" min="0" max="1000" step="10" value="1000" oninput="onPriceSliderChange()" />
+      </div>
+      <input type="hidden" id="price-min" value="0" />
     </div>
 
     <!-- צבעים -->
@@ -3204,9 +3266,10 @@ function isAdmin() {
 // מציג/מסתיר רכיבים המיועדים למנהל בלבד
 function applyAdminVisibility() {
   const admin = isAdmin();
-  // כפתור ניהול הקטלוג ב-mode-bar
-  const adminModeBtn = document.querySelector('.mode-btn[data-mode="admin"]');
-  if (adminModeBtn) adminModeBtn.style.display = admin ? '' : 'none';
+  // כל סרגל המצב (mode-bar) — כולל כפתור "אפליקציה" — מוצג רק למנהל.
+  // למשתמש רגיל אין מסך ניהול, ולכן הסרגל מיותר ומוסתר לגמרי.
+  const modeBar = document.querySelector('.mode-bar');
+  if (modeBar) modeBar.style.display = admin ? '' : 'none';
   // כפתורי ייצוא/ייבוא בפרופיל
   document.querySelectorAll('[data-admin-only]').forEach(el => {
     el.style.display = admin ? '' : 'none';
@@ -69841,6 +69904,8 @@ function updateButtonStates() {
   document.getElementById('btn-pass').disabled = !hasCard;
   document.getElementById('btn-super').disabled = !hasCard;
   document.getElementById('btn-info').disabled = !hasCard;
+  const undoBtn = document.getElementById('btn-undo');
+  if (undoBtn) undoBtn.disabled = !(userState.history && userState.history.length > 0);
 }
 
 function attachGalleryToCard(card) {
@@ -70006,27 +70071,27 @@ async function finishSwipe(action) {
   const stamp = top.querySelector(stampClass);
   if (stamp) stamp.style.opacity = 1;
 
-  // הסרת data-stack-pos והוספת קלאס animation
+  // אנימציית יציאה
   top.removeAttribute('data-stack-pos');
   let animClass = 'left';
   if (action === 'like') animClass = 'right';
   else if (action === 'super') animClass = 'up';
   top.classList.add('swiping-out', animClass);
 
-  // קידום שאר הכרטיסים
+  // קידום מיידי של הכרטיסים שמאחור (ויזואלי בלבד, עד ל-renderDeck)
   const middle = deck.querySelector('.card[data-stack-pos="1"]');
   const back = deck.querySelector('.card[data-stack-pos="2"]');
   if (middle) middle.setAttribute('data-stack-pos', '0');
   if (back) back.setAttribute('data-stack-pos', '1');
 
-  // עדכון state
+  // עדכון state — הסרת כפילויות ליתר ביטחון
   if (action === 'like') {
-    userState.likedItems.push(itemId);
+    if (!userState.likedItems.includes(itemId)) userState.likedItems.push(itemId);
   } else if (action === 'super') {
-    userState.favoriteItems.push(itemId);
-    userState.likedItems.push(itemId); // גם נחשב לייק (הוקטור משוקלל יותר חזק)
+    if (!userState.favoriteItems.includes(itemId)) userState.favoriteItems.push(itemId);
+    if (!userState.likedItems.includes(itemId)) userState.likedItems.push(itemId);
   } else {
-    userState.passedItems.push(itemId);
+    if (!userState.passedItems.includes(itemId)) userState.passedItems.push(itemId);
   }
   userState.history.unshift({ itemId, action, ts: Date.now() });
   userState.currentIndex++;
@@ -70044,7 +70109,7 @@ async function finishSwipe(action) {
       setTimeout(() => showToast('המלצות עודכנו לפי הסגנון שלך'), 300);
     }
     if (action === 'super') {
-      needsRebuild = true; // סופר-לייק תמיד מעדכן
+      needsRebuild = true;
       setTimeout(() => showToast('נשמר במועדפים — נמצא לך עוד כאלה'), 300);
     }
   }
@@ -70052,47 +70117,71 @@ async function finishSwipe(action) {
   await saveUserState();
   updateStats();
 
-  // המתנה לסיום האנימציה
+  // המתנה לסיום האנימציה — ואז בנייה מחדש נקייה של ה-deck
   setTimeout(() => {
-    // הסרת הכרטיס שעזב
     top.remove();
 
     if (needsRebuild) {
-      buildQueue();
-    }
-
-    // הוספת stamps לכרטיס שהפך לעליון
-    const newTop = deck.querySelector('.card[data-stack-pos="0"]');
-    if (newTop && !newTop.querySelector('.stamp-like')) {
-      newTop.insertAdjacentHTML('beforeend',
-        '<div class="stamp stamp-like">LIKE</div>' +
-        '<div class="stamp stamp-pass">PASS</div>' +
-        '<div class="stamp stamp-super">SUPER</div>');
-    }
-
-    // הוספת כרטיס חדש מאחור (אם יש)
-    const nextItemIdx = userState.currentIndex + 2;
-    if (nextItemIdx < userState.queue.length) {
-      const nextItem = userState.queue[nextItemIdx];
-      const exists = deck.querySelector(`.card[data-item-id="${nextItem.id}"]`);
-      if (!exists) {
-        const div = document.createElement('div');
-        div.innerHTML = buildCardHTML(nextItem, 2);
-        deck.insertBefore(div.firstElementChild, deck.firstChild);
-      }
-    }
-
-    // אם הסטאק ריק או כמעט ריק — נבנה תור מחדש (נמלא אוטומטית)
-    if (deck.children.length === 0 || userState.currentIndex >= userState.queue.length) {
+      // בניית תור חדש לפי הוקטור המעודכן — מסירה את כל מה שנראה
       buildQueue();
       renderDeck();
     } else {
-      attachSwipeHandlers();
-      updateButtonStates();
+      // קידום נקי: בונים מחדש את ה-deck מהמיקום הנוכחי בתור.
+      // זה מבטיח סנכרון מלא בין ה-DOM למצב, ומונע כרטיסים תקועים או כפילויות.
+      if (userState.currentIndex >= userState.queue.length) {
+        buildQueue();
+      }
+      renderDeck();
     }
 
     isAnimating = false;
   }, 500);
+}
+
+/* ====== חזרה למוצר הקודם (Undo) ======
+   מבטל את הפעולה האחרונה: מסיר את הפריט מהרשימה המתאימה
+   (לייק/פס/מועדף), מחזיר אותו לראש התור, ומרענן את התצוגה. */
+async function undoSwipe() {
+  if (isAnimating) return;
+  if (!userState.history || userState.history.length === 0) {
+    showToast('אין פעולה לבטל');
+    return;
+  }
+  const last = userState.history.shift();   // הפעולה האחרונה
+  const { itemId, action } = last;
+
+  // הסרת הפריט מהרשימות לפי סוג הפעולה
+  if (action === 'like') {
+    userState.likedItems = userState.likedItems.filter(id => id !== itemId);
+  } else if (action === 'super') {
+    userState.favoriteItems = userState.favoriteItems.filter(id => id !== itemId);
+    userState.likedItems = userState.likedItems.filter(id => id !== itemId);
+  } else {
+    userState.passedItems = userState.passedItems.filter(id => id !== itemId);
+  }
+
+  // עדכון הוקטור מחדש (כי ייתכן שהסרנו לייק)
+  if (action === 'like' || action === 'super') {
+    updateUserVector();
+  }
+
+  // החזרת הפריט לראש התור הנוכחי
+  const item = catalog.find(c => c.id === itemId);
+  if (item) {
+    // נחזיר את המצביע אחורה אם אפשר, אחרת נזריק את הפריט לתחילת התור
+    if (userState.currentIndex > 0 &&
+        userState.queue[userState.currentIndex - 1] &&
+        userState.queue[userState.currentIndex - 1].id === itemId) {
+      userState.currentIndex--;
+    } else {
+      userState.queue.splice(userState.currentIndex, 0, item);
+    }
+  }
+
+  await saveUserState();
+  updateStats();
+  renderDeck();
+  showToast('חזרת למוצר הקודם');
 }
 
 function manualSwipe(action) {
@@ -70301,6 +70390,16 @@ function renderProfile() {
 // פונקציה ריקה במקום renderForYou הישן
 function renderForYou() { /* deprecated */ }
 
+/* ====== קישור רכישה לכל פריט ======
+   אם לפריט יש כתובת ישירה (url) — מחזירים אותה.
+   אחרת — בונים קישור חיפוש חכם (שם הפריט + מותג) בגוגל,
+   כך שלכל מוצר יש קישור רכישה שימושי. */
+function getBuyUrl(item) {
+  if (item.url && item.url.trim()) return item.url.trim();
+  const query = encodeURIComponent(`${item.name} ${item.brand}`.trim());
+  return `https://www.google.com/search?q=${query}&tbm=shop`;
+}
+
 function showInfoModal(id) {
   const item = catalog.find(x => x.id === id);
   if (!item) return;
@@ -70310,9 +70409,9 @@ function showInfoModal(id) {
     PALETTES[inferPalette(item)].p,
     PALETTES[inferPalette(item)].a
   );
-  const shopLink = item.url
-    ? `<a href="${item.url}" target="_blank" rel="noopener" style="display:block;margin-top:16px;padding:14px;background:var(--ink);color:var(--bg);border-radius:100px;text-align:center;text-decoration:none;font-family:'Heebo',sans-serif;font-weight:500;font-size:13px;letter-spacing:0.02em;">לרכישה ב-${item.brand} ←</a>`
-    : '';
+  const buyUrl = getBuyUrl(item);
+  const linkLabel = item.url ? `לרכישה ב-${item.brand}` : `חפש "${item.name}" לרכישה`;
+  const shopLink = `<a href="${buyUrl}" target="_blank" rel="noopener" style="display:block;margin-top:16px;padding:14px;background:var(--ink);color:var(--bg);border-radius:100px;text-align:center;text-decoration:none;font-family:'Heebo',sans-serif;font-weight:500;font-size:13px;letter-spacing:0.02em;">${linkLabel} ←</a>`;
   document.getElementById('info-content').innerHTML = `
     <h3>${item.name}</h3>
     <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink-dim);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:16px;">${item.brand}${item.color ? ' · ' + item.color : ''}</div>
@@ -70975,8 +71074,11 @@ function buildOutfits() {
         slots: new Set(['top', 'bottom']),
       };
 
-      // ז'קט מתאים (לא תמיד) — אך רק אם עוד לא יש top
-      if (outerwearItems.length > 0 && Math.random() > 0.5) {
+      // ז'קט/מעיל מתאים — מתווסף רק אם העליון אינו סוודר.
+      // (סוודר הוא כבר שכבה עבה, ולא הגיוני להוסיף מעליו ז'קט).
+      // כך נמנע מצב של "גם סווטשרט וגם ז'קט" באותו אווטפיט.
+      const topIsLayer = top.category === 'sweater';
+      if (!topIsLayer && outerwearItems.length > 0 && Math.random() > 0.5) {
         const bestOuter = pickBestComplement(outerwearItems, [top, bottom]);
         if (bestOuter) {
           outfit.pieces.push(bestOuter);
@@ -71548,10 +71650,12 @@ function updateFilterBadge() {
 }
 
 function openFiltersModal() {
-  // אכלוס מצב נוכחי
-  document.getElementById('price-min').value = advancedFilters.priceMin;
+  // אכלוס מצב נוכחי — שדות המחיר החדשים
+  document.getElementById('price-min-input').value = advancedFilters.priceMin;
+  document.getElementById('price-max-input').value = advancedFilters.priceMax;
   document.getElementById('price-max').value = advancedFilters.priceMax;
-  updatePriceRange();
+  document.getElementById('price-min').value = advancedFilters.priceMin;
+  syncPriceDisplay(advancedFilters.priceMin, advancedFilters.priceMax);
 
   // weather
   document.querySelectorAll('.weather-pill').forEach(p => {
@@ -71585,33 +71689,44 @@ function closeFiltersModal() {
   document.getElementById('filters-modal').classList.remove('show');
 }
 
-function updatePriceRange() {
-  const minSlider = document.getElementById('price-min');
-  const maxSlider = document.getElementById('price-max');
-  let min = parseInt(minSlider.value);
-  let max = parseInt(maxSlider.value);
-  // מניעת חפיפה
-  if (min > max - 50) {
-    if (event && event.target === minSlider) {
-      min = max - 50;
-      minSlider.value = min;
-    } else {
-      max = min + 50;
-      maxSlider.value = max;
-    }
-  }
+// סנכרון תצוגת המחיר + ערכי hidden מתוך השדות
+function syncPriceDisplay(min, max) {
+  min = Math.max(0, Math.min(1000, min));
+  max = Math.max(0, Math.min(1000, max));
+  document.getElementById('price-min').value = min;
+  document.getElementById('price-max').value = max;
   const display = document.getElementById('price-range-display');
-  const maxText = max >= 1000 ? '₪1000+' : `₪${max}`;
-  display.textContent = `₪${min} - ${maxText}`;
-  // עדכון גרף המסלול
-  const fill = document.getElementById('price-track-fill');
-  if (fill) {
-    const minPct = (min / 1000) * 100;
-    const maxPct = (max / 1000) * 100;
-    fill.style.left = minPct + '%';
-    fill.style.width = (maxPct - minPct) + '%';
+  if (display) {
+    const maxText = max >= 1000 ? '₪1000+' : `₪${max}`;
+    display.textContent = `₪${min} - ${maxText}`;
   }
 }
+
+// שינוי בשדה מספרי (מ- / עד)
+function onPriceInputChange() {
+  const minInput = document.getElementById('price-min-input');
+  const maxInput = document.getElementById('price-max-input');
+  let min = parseInt(minInput.value) || 0;
+  let max = parseInt(maxInput.value);
+  if (isNaN(max)) max = 1000;
+  // הסליידר היחיד עוקב אחרי המקסימום
+  const slider = document.getElementById('price-max');
+  if (slider) slider.value = Math.max(0, Math.min(1000, max));
+  syncPriceDisplay(min, max);
+}
+
+// שינוי בסליידר (משנה את המקסימום)
+function onPriceSliderChange() {
+  const slider = document.getElementById('price-max');
+  const max = parseInt(slider.value);
+  const maxInput = document.getElementById('price-max-input');
+  if (maxInput) maxInput.value = max;
+  const min = parseInt(document.getElementById('price-min-input').value) || 0;
+  syncPriceDisplay(min, max);
+}
+
+// תאימות לאחור — אם נקרא במקום כלשהו
+function updatePriceRange() { onPriceInputChange(); }
 
 function applyFilters() {
   // איסוף מצב
@@ -71643,7 +71758,9 @@ function clearAllFilters() {
   });
   document.getElementById('price-min').value = 0;
   document.getElementById('price-max').value = 1000;
-  updatePriceRange();
+  document.getElementById('price-min-input').value = 0;
+  document.getElementById('price-max-input').value = 1000;
+  syncPriceDisplay(0, 1000);
   document.querySelectorAll('.color-chip').forEach(c => c.classList.remove('selected'));
   document.querySelectorAll('.fit-pill').forEach(c => c.classList.remove('selected'));
   document.querySelectorAll('.brand-pill-filter').forEach(c => c.classList.remove('selected'));
