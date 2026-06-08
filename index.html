@@ -97,6 +97,13 @@
     position: relative;
     z-index: 10;
   }
+  /* למשתמש רגיל (ללא סרגל ניהול צף) — header קומפקטי יותר */
+  body.no-admin header {
+    padding: 18px 24px 12px;
+  }
+  body.no-admin .logo { font-size: 19px; }
+  body.no-admin .header-stats { font-size: 9px; }
+  body.no-admin .header-stats div span { font-size: 14px; }
   .logo {
     font-family: 'Fraunces', serif;
     font-weight: 600;
@@ -139,41 +146,46 @@
     position: relative;
     display: flex;
     align-items: center;
+    justify-content: center;
     background: var(--bg);
     border-bottom: 1px solid var(--line);
     z-index: 10;
+    padding: 10px 24px;
   }
-  /* כפתור הסינון קבוע בצד ימין (RTL) ולא נגלל */
-  .category-filter-wrap .cat-pill-filters {
-    flex-shrink: 0;
-    margin: 0 24px 0 12px;
-    order: -1;
-    z-index: 12;
-    position: relative;
-  }
-  /* אינדיקציית גלילה — הצללה בקצה השמאלי שמרמזת שיש עוד קטגוריות */
-  .category-filter-wrap::after {
-    content: '';
-    position: absolute;
-    top: 0; bottom: 0; left: 0;
-    width: 36px;
-    background: linear-gradient(to left, var(--bg), transparent);
-    pointer-events: none;
-    z-index: 11;
-  }
-  .category-filter {
+  /* בר סינון מינימליסטי — כפתור יחיד מרכזי */
+  .filter-bar-btn {
     display: flex;
-    gap: 8px;
-    padding: 12px 0 12px 24px;
-    overflow-x: auto;
-    background: var(--bg);
-    scrollbar-width: none;
-    -ms-overflow-style: none;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    max-width: 420px;
+    padding: 11px 18px;
+    border: 1.5px solid var(--line);
+    background: var(--bg-2);
+    color: var(--ink);
+    font-family: 'Heebo', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    border-radius: 100px;
+    cursor: pointer;
+    transition: all 0.2s;
     position: relative;
-    z-index: 10;
-    flex: 1;
-    scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch;
+  }
+  .filter-bar-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .filter-bar-icon { font-size: 15px; line-height: 1; }
+  .filter-bar-label { letter-spacing: 0.02em; }
+  .filter-bar-btn #filter-badge:not(:empty) {
+    background: var(--accent);
+    color: #fff;
+    font-size: 11px;
+    min-width: 18px;
+    height: 18px;
+    border-radius: 100px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 5px;
   }
   .category-filter::-webkit-scrollbar { display: none; }
   .cat-pill {
@@ -2214,6 +2226,29 @@
     text-transform: uppercase;
     letter-spacing: 0.05em;
   }
+  .filter-cat-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .filter-cat-pill {
+    padding: 9px 16px;
+    border: 1.5px solid var(--line);
+    background: var(--bg);
+    color: var(--ink-dim);
+    font-family: 'Heebo', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    border-radius: 100px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .filter-cat-pill:hover { border-color: var(--ink); color: var(--ink); }
+  .filter-cat-pill.active {
+    background: var(--ink);
+    color: var(--bg);
+    border-color: var(--ink);
+  }
   .filter-section {
     margin-bottom: 24px;
     padding-bottom: 20px;
@@ -2545,12 +2580,14 @@
       <h2 class="ob-title">איזו מידה את/ה לובש/ת למעלה?</h2>
       <p class="ob-sub">המערכת תמליץ עבורך על המידה הטובה ביותר לכל פריט.</p>
       <div class="ob-options ob-sizes" id="ob-top-size-options">
+        <button class="ob-option" data-value="XXS">XXS</button>
         <button class="ob-option" data-value="XS">XS</button>
         <button class="ob-option" data-value="S">S</button>
         <button class="ob-option" data-value="M">M</button>
         <button class="ob-option" data-value="L">L</button>
         <button class="ob-option" data-value="XL">XL</button>
         <button class="ob-option" data-value="XXL">XXL</button>
+        <button class="ob-option" data-value="XXXL">XXXL</button>
       </div>
     </div>
 
@@ -2560,6 +2597,7 @@
       <h2 class="ob-title">ומידה למטה?</h2>
       <p class="ob-sub">למכנסיים, ג'ינסים וחצאיות. בחר/י גם מידת נעליים — הדף יתקדם אוטומטית.</p>
       <div class="ob-options ob-sizes" id="ob-bottom-size-options">
+        <button class="ob-option" data-value="24">24</button>
         <button class="ob-option" data-value="26">26</button>
         <button class="ob-option" data-value="28">28</button>
         <button class="ob-option" data-value="30">30</button>
@@ -2568,10 +2606,13 @@
         <button class="ob-option" data-value="36">36</button>
         <button class="ob-option" data-value="38">38</button>
         <button class="ob-option" data-value="40">40</button>
+        <button class="ob-option" data-value="42">42</button>
+        <button class="ob-option" data-value="44">44</button>
       </div>
 
       <h3 class="ob-mini-title">מידת נעליים</h3>
       <div class="ob-options ob-sizes" id="ob-shoe-size-options">
+        <button class="ob-option" data-value="35">35</button>
         <button class="ob-option" data-value="36">36</button>
         <button class="ob-option" data-value="37">37</button>
         <button class="ob-option" data-value="38">38</button>
@@ -2582,6 +2623,8 @@
         <button class="ob-option" data-value="43">43</button>
         <button class="ob-option" data-value="44">44</button>
         <button class="ob-option" data-value="45">45</button>
+        <button class="ob-option" data-value="46">46</button>
+        <button class="ob-option" data-value="47">47</button>
       </div>
     </div>
 
@@ -2649,22 +2692,12 @@
       <button class="tab" data-view="profile">פרופיל</button>
     </div>
 
-    <!-- סרגל סינון לפי קטגוריה — מוצג רק במסך גלה -->
+    <!-- סרגל סינון מינימליסטי — כפתור יחיד שפותח את כל אפשרויות הסינון -->
     <div class="category-filter-wrap" id="category-filter-wrap">
-      <div class="category-filter" id="category-filter">
-        <button class="cat-pill active" data-cat="all">הכל</button>
-        <button class="cat-pill" data-cat="shoes">נעליים</button>
-        <button class="cat-pill" data-cat="tee">טישרטים</button>
-        <button class="cat-pill" data-cat="shirt">חולצות</button>
-        <button class="cat-pill" data-cat="sweater">סוודרים</button>
-        <button class="cat-pill" data-cat="pants">מכנסיים</button>
-        <button class="cat-pill" data-cat="shorts">שורט</button>
-        <button class="cat-pill" data-cat="dress">שמלות</button>
-        <button class="cat-pill" data-cat="outerwear">ז'קטים</button>
-        <button class="cat-pill" data-cat="accessory">אקססוריז</button>
-      </div>
-      <button class="cat-pill cat-pill-filters" id="open-filters" onclick="openFiltersModal()">
-        <span class="filter-icon">סינון</span> <span id="filter-badge"></span>
+      <button class="filter-bar-btn" id="open-filters" onclick="openFiltersModal()">
+        <span class="filter-bar-label" id="filter-bar-label">סינון וקטגוריות</span>
+        <span class="filter-bar-icon">☰</span>
+        <span id="filter-badge"></span>
       </button>
     </div>
 
@@ -2940,6 +2973,23 @@
     <button class="modal-close" onclick="closeFiltersModal()">✕</button>
     <h3>סינון מתקדם</h3>
     <div class="modal-sub">בחר/י את העדפותיך כדי לראות רק פריטים שמתאימים.</div>
+
+    <!-- קטגוריות (סוג בגד) -->
+    <div class="filter-section">
+      <div class="filter-label">סוג בגד</div>
+      <div class="filter-cat-grid" id="filter-cat-grid">
+        <button class="filter-cat-pill active" data-cat="all">הכל</button>
+        <button class="filter-cat-pill" data-cat="shoes">נעליים</button>
+        <button class="filter-cat-pill" data-cat="tee">טישרטים</button>
+        <button class="filter-cat-pill" data-cat="shirt">חולצות</button>
+        <button class="filter-cat-pill" data-cat="sweater">סוודרים</button>
+        <button class="filter-cat-pill" data-cat="pants">מכנסיים</button>
+        <button class="filter-cat-pill" data-cat="shorts">שורט</button>
+        <button class="filter-cat-pill" data-cat="dress">שמלות</button>
+        <button class="filter-cat-pill" data-cat="outerwear">ז'קטים</button>
+        <button class="filter-cat-pill" data-cat="accessory">אקססוריז</button>
+      </div>
+    </div>
 
     <!-- מזג אוויר -->
     <div class="filter-section">
@@ -3266,6 +3316,8 @@ function isAdmin() {
 // מציג/מסתיר רכיבים המיועדים למנהל בלבד
 function applyAdminVisibility() {
   const admin = isAdmin();
+  // סימון ה-body — משמש לכיווץ ה-header למשתמש רגיל
+  document.body.classList.toggle('no-admin', !admin);
   // כל סרגל המצב (mode-bar) — כולל כפתור "אפליקציה" — מוצג רק למנהל.
   // למשתמש רגיל אין מסך ניהול, ולכן הסרגל מיותר ומוסתר לגמרי.
   const modeBar = document.querySelector('.mode-bar');
@@ -71499,15 +71551,26 @@ function updateOutfitsBadge() {
    ============================================================ */
 function setCategoryFilter(cat) {
   currentCategory = cat;
-  document.querySelectorAll('.cat-pill[data-cat]').forEach(p => {
+  // סנכרון מצב 'active' בכל ה-pills (גם הישנים אם קיימים, וגם אלה שבמודל)
+  document.querySelectorAll('.cat-pill[data-cat], .filter-cat-pill[data-cat]').forEach(p => {
     p.classList.toggle('active', p.dataset.cat === cat);
   });
+  // עדכון התווית בבר המינימליסטי
+  const label = document.getElementById('filter-bar-label');
+  if (label) {
+    const names = {
+      all: 'סינון וקטגוריות', shoes: 'נעליים', tee: 'טישרטים', shirt: 'חולצות',
+      sweater: 'סוודרים', pants: 'מכנסיים', shorts: 'שורט', dress: 'שמלות',
+      outerwear: "ז'קטים", accessory: 'אקססוריז',
+    };
+    label.textContent = names[cat] || 'סינון וקטגוריות';
+  }
   buildQueue();
   renderDeck();
   updateStats();
 }
 
-document.querySelectorAll('.cat-pill[data-cat]').forEach(pill => {
+document.querySelectorAll('.cat-pill[data-cat], .filter-cat-pill[data-cat]').forEach(pill => {
   pill.addEventListener('click', () => setCategoryFilter(pill.dataset.cat));
 });
 
