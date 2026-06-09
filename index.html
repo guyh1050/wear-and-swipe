@@ -6,7 +6,7 @@
 <title>Wear&Swipe — App + Catalog Manager</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..900,0..100&family=Heebo:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg: #f5f0e8;
@@ -61,7 +61,7 @@
     border: none;
     background: transparent;
     color: var(--bg-2);
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Heebo', sans-serif;
     font-size: 11px;
     letter-spacing: 0.05em;
     text-transform: uppercase;
@@ -105,18 +105,17 @@
   body.no-admin .header-stats { font-size: 9px; }
   body.no-admin .header-stats div span { font-size: 14px; }
   .logo {
-    font-family: 'Fraunces', serif;
-    font-weight: 600;
+    font-family: 'Heebo', sans-serif;
+    font-weight: 800;
     font-size: 22px;
     letter-spacing: -0.02em;
-    font-style: italic;
   }
-  .logo .amp { color: var(--accent); font-style: italic; font-weight: 400; }
+  .logo .amp { color: var(--accent); font-weight: 400; }
 
   .header-stats {
     display: flex;
     gap: 18px;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Heebo', sans-serif;
     font-size: 10px;
     color: var(--ink-dim);
     letter-spacing: 0.05em;
@@ -126,7 +125,7 @@
     display: block;
     font-size: 16px;
     color: var(--ink);
-    font-family: 'Fraunces', serif;
+    font-family: 'Heebo', sans-serif;
     font-weight: 500;
     margin-top: 2px;
     direction: ltr;
@@ -247,7 +246,7 @@
     text-align: center;
   }
   .auth-logo {
-    font-family: 'Fraunces', serif;
+    font-family: 'Heebo', sans-serif;
     font-weight: 600;
     font-size: 40px;
     letter-spacing: -0.02em;
@@ -256,7 +255,7 @@
   }
   .auth-logo span { color: var(--accent); }
   .auth-tagline {
-    font-family: 'Fraunces', serif;
+    font-family: 'Heebo', sans-serif;
     font-style: italic;
     font-size: 16px;
     color: var(--ink-dim);
@@ -370,7 +369,7 @@
     background: transparent;
     border: none;
     color: var(--ink-dim);
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Heebo', sans-serif;
     font-size: 11px;
     cursor: pointer;
     text-transform: uppercase;
@@ -396,7 +395,7 @@
   }
 
   .ob-step-num {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Heebo', sans-serif;
     font-size: 11px;
     color: var(--accent);
     letter-spacing: 0.15em;
@@ -405,7 +404,7 @@
     text-align: right;
   }
   .ob-title {
-    font-family: 'Fraunces', serif;
+    font-family: 'Heebo', sans-serif;
     font-style: italic;
     font-weight: 400;
     font-size: 36px;
@@ -421,7 +420,7 @@
     margin-bottom: 28px;
   }
   .ob-mini-title {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Heebo', sans-serif;
     font-size: 11px;
     color: var(--ink-dim);
     text-transform: uppercase;
@@ -465,7 +464,7 @@
     padding: 12px 0;
     width: 60px;
     text-align: center;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Heebo', sans-serif;
     font-size: 14px;
   }
   .ob-option:hover {
@@ -519,7 +518,7 @@
     margin-bottom: 8px;
   }
   .ob-style-name {
-    font-family: 'Fraunces', serif;
+    font-family: 'Heebo', sans-serif;
     font-weight: 500;
     font-size: 17px;
     margin-bottom: 2px;
@@ -594,7 +593,7 @@
     margin-bottom: 24px;
   }
   .outfits-header h2 {
-    font-family: 'Fraunces', serif;
+    font-family: 'Heebo', sans-serif;
     font-style: italic;
     font-weight: 400;
     font-size: 38px;
@@ -645,7 +644,7 @@
     border-bottom: 1px solid var(--line);
   }
   .outfit-card .outfit-title {
-    font-family: 'Fraunces', serif;
+    font-family: 'Heebo', sans-serif;
     font-style: italic;
     font-weight: 500;
     font-size: 22px;
@@ -663,18 +662,86 @@
     box-shadow: 0 1px 3px rgba(0,0,0,0.15);
   }
   .outfit-card .outfit-score {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Heebo', sans-serif;
     font-size: 11px;
     color: var(--green);
     background: rgba(45,90,61,0.1);
     padding: 4px 10px;
     border-radius: 100px;
   }
+  /* ===== קרוסלת אווטפיט (פריטים + לוק מלא) ===== */
+  .outfit-carousel {
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 14px;
+    direction: ltr;
+  }
+  .outfit-slides {
+    display: flex;
+    width: 200%;
+    transition: transform 0.35s ease;
+  }
+  .outfit-slide {
+    width: 50%;
+    flex-shrink: 0;
+    direction: rtl;
+    box-sizing: border-box;
+  }
+  /* ברירת מחדל: שקופית הפריטים (משמאל ב-flex). מעבר ללוק המלא = הזזה שמאלה */
+  .outfit-carousel[data-slide="1"] .outfit-slides { transform: translateX(-50%); }
+  .outfit-slide-full {
+    background: var(--bg);
+    border-radius: 10px;
+    border: 1px solid var(--line);
+    padding: 14px;
+  }
+  .outfit-full-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--ink-dim);
+    margin-bottom: 12px;
+    text-align: center;
+  }
+  .outfit-full-grid {
+    display: grid;
+    gap: 8px;
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .outfit-full-grid[data-count="3"],
+  .outfit-full-grid[data-count="5"] { grid-template-columns: repeat(3, 1fr); }
+  .outfit-full-item {
+    aspect-ratio: 3/4;
+    background: var(--bg-2);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .outfit-full-img { width: 100%; height: 100%; object-fit: cover; }
+  .outfit-dots {
+    display: flex;
+    justify-content: center;
+    gap: 7px;
+    margin-top: 10px;
+  }
+  .outfit-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--line);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .outfit-dot.active { background: var(--accent); width: 20px; border-radius: 100px; }
+  .outfit-swipe-hint {
+    text-align: center;
+    font-size: 11px;
+    color: var(--ink-dim);
+    margin-top: 6px;
+    opacity: 0.7;
+  }
   .outfit-card .outfit-pieces {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
     gap: 10px;
-    margin-bottom: 14px;
   }
   .outfit-piece {
     cursor: pointer;
@@ -699,7 +766,7 @@
     padding: 6px 8px 8px;
   }
   .outfit-piece-name {
-    font-family: 'Fraunces', serif;
+    font-family: 'Heebo', sans-serif;
     font-size: 11px;
     font-weight: 500;
     line-height: 1.2;
@@ -709,7 +776,7 @@
     margin-bottom: 2px;
   }
   .outfit-piece-price {
-    font-family: 'Fraunces', serif;
+    font-family: 'Heebo', sans-serif;
     font-size: 11px;
     color: var(--accent);
   }
@@ -719,7 +786,7 @@
     right: 4px;
     background: rgba(26,24,20,0.85);
     color: white;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Heebo', sans-serif;
     font-size: 8px;
     padding: 2px 6px;
     border-radius: 100px;
@@ -746,14 +813,14 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Heebo', sans-serif;
     font-size: 10px;
     color: var(--ink-dim);
     text-transform: uppercase;
     letter-spacing: 0.1em;
   }
   .outfit-card .outfit-total {
-    font-family: 'Fraunces', serif;
+    font-family: 'Heebo', sans-serif;
     font-style: italic;
     font-size: 16px;
     color: var(--accent);
@@ -799,7 +866,7 @@
   }
   .saved-count {
     color: var(--accent);
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Heebo', sans-serif;
     font-size: 11px;
     margin-right: 4px;
   }
@@ -854,14 +921,14 @@
   }
   .prefs-summary .pref-row:last-child { border-bottom: none; }
   .prefs-summary .pref-row .label {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Heebo', sans-serif;
     font-size: 10px;
     color: var(--ink-dim);
     text-transform: uppercase;
     letter-spacing: 0.1em;
   }
   .prefs-summary .pref-row .value {
-    font-family: 'Fraunces', serif;
+    font-family: 'Heebo', sans-serif;
     font-weight: 500;
     color: var(--ink);
   }
@@ -907,7 +974,7 @@
   }
   .top-rec-info { padding: 8px 10px 10px; }
   .top-rec-name {
-    font-family: 'Fraunces', serif;
+    font-family: 'Heebo', sans-serif;
     font-size: 12px;
     font-weight: 500;
     line-height: 1.2;
@@ -916,7 +983,7 @@
     white-space: nowrap;
   }
   .top-rec-price {
-    font-family: 'Fraunces', serif;
+    font-family: 'Heebo', sans-serif;
     font-size: 12px;
     color: var(--accent);
     margin-top: 2px;
@@ -927,7 +994,7 @@
     right: 6px;
     background: rgba(45,90,61,0.9);
     color: white;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Heebo', sans-serif;
     font-size: 9px;
     padding: 2px 6px;
     border-radius: 100px;
@@ -943,7 +1010,7 @@
     color: var(--ink);
     padding: 6px 10px;
     border-radius: 100px;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Heebo', sans-serif;
     font-size: 10px;
     font-weight: 600;
     letter-spacing: 0.05em;
@@ -1042,7 +1109,7 @@
     background: var(--accent);
   }
   .tab .count {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Heebo', sans-serif;
     font-size: 10px;
     color: var(--accent);
     margin-right: 4px;
@@ -1165,7 +1232,7 @@
     top: 14px;
     right: 14px;
     color: white;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Heebo', sans-serif;
     font-size: 10px;
     font-weight: 600;
     padding: 6px 12px;
@@ -1201,7 +1268,7 @@
     background: var(--bg);
   }
   .card-brand {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Heebo', sans-serif;
     font-size: 10px;
     color: var(--ink-dim);
     text-transform: uppercase;
@@ -1209,7 +1276,7 @@
     margin-bottom: 6px;
   }
   .card-name {
-    font-family: 'Fraunces', serif;
+    font-family: 'Heebo', sans-serif;
     font-weight: 500;
     font-size: 22px;
     line-height: 1.1;
@@ -1219,14 +1286,14 @@
   }
   .card-meta { display: flex; justify-content: space-between; align-items: center; }
   .card-price {
-    font-family: 'Fraunces', serif;
+    font-family: 'Heebo', sans-serif;
     font-weight: 500;
     font-size: 18px;
     color: var(--accent);
   }
   .card-tags { display: flex; gap: 6px; }
   .card-tag {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Heebo', sans-serif;
     font-size: 9px;
     color: var(--ink-dim);
     border: 1px solid var(--line);
@@ -1240,7 +1307,7 @@
     position: absolute;
     top: 30px;
     padding: 10px 18px;
-    font-family: 'Fraunces', serif;
+    font-family: 'Heebo', sans-serif;
     font-style: italic;
     font-weight: 600;
     font-size: 28px;
@@ -1299,26 +1366,33 @@
   .ctrl-btn:hover { transform: scale(1.05); }
   .ctrl-btn:active { transform: scale(0.95); }
   .ctrl-btn:disabled { opacity: 0.3; cursor: not-allowed; }
-  .ctrl-btn.pass { border-color: var(--accent); color: var(--accent); }
+  /* כפתורים ראשיים — לייק, פס, סופר — גודל אחיד */
+  .ctrl-btn.pass { border-color: var(--accent); color: var(--accent); width: 60px; height: 60px; }
   .ctrl-btn.pass:hover:not(:disabled) { background: var(--accent); color: var(--bg); }
-  .ctrl-btn.like { border-color: var(--green); color: var(--green); width: 64px; height: 64px; }
+  .ctrl-btn.like { border-color: var(--green); color: var(--green); width: 60px; height: 60px; }
   .ctrl-btn.like:hover:not(:disabled) { background: var(--green); color: var(--bg); }
-  .ctrl-btn.info { width: 44px; height: 44px; font-size: 14px; }
+  .ctrl-btn.super {
+    border-color: #f5b400;
+    color: #f5b400;
+    width: 60px;
+    height: 60px;
+    font-size: 24px;
+  }
+  /* כפתורים משניים — מידע וחזור — קטנים יותר */
+  .ctrl-btn.info {
+    width: 42px;
+    height: 42px;
+    font-size: 13px;
+    margin-right: auto;   /* דוחף את כפתור המידע לקצה השמאלי (RTL) */
+  }
   .ctrl-btn.undo {
-    width: 44px;
-    height: 44px;
-    font-size: 18px;
+    width: 42px;
+    height: 42px;
+    font-size: 17px;
     border-color: var(--ink-dim);
     color: var(--ink-dim);
   }
   .ctrl-btn.undo:hover:not(:disabled) { background: var(--ink-dim); color: var(--bg); }
-  .ctrl-btn.super {
-    border-color: #f5b400;
-    color: #f5b400;
-    width: 50px;
-    height: 50px;
-    font-size: 22px;
-  }
   .ctrl-btn.super:hover:not(:disabled) {
     background: #f5b400;
     color: var(--bg);
@@ -1364,7 +1438,7 @@
     font-size: 24px;
   }
   .empty h3 {
-    font-family: 'Fraunces', serif;
+    font-family: 'Heebo', sans-serif;
     font-size: 28px;
     font-weight: 500;
     margin-bottom: 12px;
@@ -1395,7 +1469,7 @@
   .foryou-content { flex: 1; overflow-y: auto; padding: 20px 24px 40px; }
   .foryou-header { margin-bottom: 24px; }
   .foryou-header h2 {
-    font-family: 'Fraunces', serif;
+    font-family: 'Heebo', sans-serif;
     font-style: italic;
     font-weight: 400;
     font-size: 38px;
@@ -1429,14 +1503,14 @@
   }
   .rec-info { padding: 10px 12px 14px; }
   .rec-name {
-    font-family: 'Fraunces', serif;
+    font-family: 'Heebo', sans-serif;
     font-weight: 500;
     font-size: 14px;
     line-height: 1.2;
     margin-bottom: 4px;
   }
   .rec-brand {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Heebo', sans-serif;
     font-size: 9px;
     color: var(--ink-dim);
     text-transform: uppercase;
@@ -1444,13 +1518,13 @@
   }
   .rec-meta { display: flex; justify-content: space-between; align-items: center; margin-top: 6px; }
   .rec-price {
-    font-family: 'Fraunces', serif;
+    font-family: 'Heebo', sans-serif;
     font-weight: 500;
     font-size: 13px;
     color: var(--accent);
   }
   .rec-score {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Heebo', sans-serif;
     font-size: 9px;
     color: var(--green);
     background: rgba(45,90,61,0.1);
@@ -1470,19 +1544,19 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: 'Fraunces', serif;
+    font-family: 'Heebo', sans-serif;
     font-style: italic;
     font-size: 32px;
     font-weight: 500;
     margin: 0 auto 14px;
   }
   .profile-header h2 {
-    font-family: 'Fraunces', serif;
+    font-family: 'Heebo', sans-serif;
     font-size: 24px;
     font-weight: 500;
   }
   .profile-header .label {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Heebo', sans-serif;
     font-size: 10px;
     color: var(--ink-dim);
     text-transform: uppercase;
@@ -1497,6 +1571,24 @@
     border-top: 1px solid var(--line);
     border-bottom: 1px solid var(--line);
   }
+  .stats-grid-4 { grid-template-columns: 1fr 1fr 1fr 1fr; }
+  .stats-grid-4 .stat-cell .num { font-size: 26px; }
+  .stats-grid-4 .stat-cell { padding: 16px 4px; }
+  .lang-toggle {
+    border: 1.5px solid var(--line);
+    background: var(--bg-2);
+    color: var(--ink);
+    font-family: 'Heebo', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    width: 42px;
+    height: 30px;
+    border-radius: 100px;
+    cursor: pointer;
+    letter-spacing: 0.05em;
+    transition: all 0.2s;
+  }
+  .lang-toggle:hover { border-color: var(--accent); color: var(--accent); }
   .stat-cell {
     padding: 18px 8px;
     text-align: center;
@@ -1504,14 +1596,14 @@
   }
   .stat-cell:last-child { border-left: none; }
   .stat-cell .num {
-    font-family: 'Fraunces', serif;
+    font-family: 'Heebo', sans-serif;
     font-size: 30px;
     font-weight: 400;
     line-height: 1;
     letter-spacing: -0.02em;
   }
   .stat-cell .label {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Heebo', sans-serif;
     font-size: 9px;
     color: var(--ink-dim);
     text-transform: uppercase;
@@ -1520,7 +1612,7 @@
   }
 
   .section-h {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Heebo', sans-serif;
     font-size: 10px;
     color: var(--ink-dim);
     text-transform: uppercase;
@@ -1562,7 +1654,7 @@
   .vector-meta {
     display: flex;
     justify-content: space-between;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Heebo', sans-serif;
     font-size: 10px;
     color: var(--ink-dim);
     margin-top: 8px;
@@ -1601,7 +1693,7 @@
   }
   .history-info { flex: 1; min-width: 0; }
   .history-info .name {
-    font-family: 'Fraunces', serif;
+    font-family: 'Heebo', sans-serif;
     font-size: 13px;
     font-weight: 500;
     white-space: nowrap;
@@ -1609,14 +1701,14 @@
     text-overflow: ellipsis;
   }
   .history-info .brand {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Heebo', sans-serif;
     font-size: 9px;
     color: var(--ink-dim);
     text-transform: uppercase;
     letter-spacing: 0.1em;
   }
   .history-action {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Heebo', sans-serif;
     font-size: 10px;
     padding: 4px 10px;
     border-radius: 100px;
@@ -1648,7 +1740,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: 'Fraunces', serif;
+    font-family: 'Heebo', sans-serif;
     font-weight: 600;
     font-size: 16px;
   }
@@ -1660,7 +1752,7 @@
     background: var(--bg-2);
     border-radius: 10px;
     text-align: center;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Heebo', sans-serif;
     font-size: 13px;
     color: var(--accent);
     direction: ltr;
@@ -1715,7 +1807,7 @@
     gap: 16px;
   }
   .admin-title h1 {
-    font-family: 'Fraunces', serif;
+    font-family: 'Heebo', sans-serif;
     font-style: italic;
     font-weight: 400;
     font-size: 48px;
@@ -1771,14 +1863,14 @@
     padding: 18px 22px;
   }
   .stat-tile .num {
-    font-family: 'Fraunces', serif;
+    font-family: 'Heebo', sans-serif;
     font-size: 36px;
     font-weight: 400;
     line-height: 1;
     letter-spacing: -0.02em;
   }
   .stat-tile .label {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Heebo', sans-serif;
     font-size: 10px;
     color: var(--ink-dim);
     text-transform: uppercase;
@@ -1811,7 +1903,7 @@
     border: 1px solid var(--line);
     background: var(--bg);
     border-radius: 100px;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Heebo', sans-serif;
     font-size: 11px;
     cursor: pointer;
     transition: all 0.2s;
@@ -1888,21 +1980,21 @@
   }
   .item-card .body { padding: 12px 14px 14px; }
   .item-card .body .name {
-    font-family: 'Fraunces', serif;
+    font-family: 'Heebo', sans-serif;
     font-size: 15px;
     font-weight: 500;
     line-height: 1.2;
     margin-bottom: 4px;
   }
   .item-card .body .brand {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Heebo', sans-serif;
     font-size: 9px;
     color: var(--ink-dim);
     text-transform: uppercase;
     letter-spacing: 0.1em;
   }
   .item-card .body .price {
-    font-family: 'Fraunces', serif;
+    font-family: 'Heebo', sans-serif;
     font-weight: 500;
     font-size: 14px;
     color: var(--accent);
@@ -1941,7 +2033,7 @@
     right: 8px;
     background: rgba(26,24,20,0.7);
     color: var(--bg);
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Heebo', sans-serif;
     font-size: 9px;
     padding: 3px 8px;
     border-radius: 100px;
@@ -1987,7 +2079,7 @@
     justify-content: center;
   }
   .modal h3 {
-    font-family: 'Fraunces', serif;
+    font-family: 'Heebo', sans-serif;
     font-size: 28px;
     font-weight: 500;
     margin-bottom: 6px;
@@ -2002,7 +2094,7 @@
   .form-group { margin-bottom: 18px; }
   .form-group label {
     display: block;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Heebo', sans-serif;
     font-size: 10px;
     color: var(--ink-dim);
     text-transform: uppercase;
@@ -2061,7 +2153,7 @@
     border: none;
     background: transparent;
     color: var(--ink-dim);
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Heebo', sans-serif;
     font-size: 11px;
     text-transform: uppercase;
     letter-spacing: 0.05em;
@@ -2075,7 +2167,7 @@
     border-radius: 8px;
     padding: 14px;
     margin-bottom: 16px;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Heebo', sans-serif;
     font-size: 11px;
     color: var(--ink-dim);
     line-height: 1.6;
@@ -2089,7 +2181,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Heebo', sans-serif;
     font-size: 10px;
     color: var(--ink-dim);
     text-transform: uppercase;
@@ -2125,7 +2217,7 @@
     transition: all 0.3s;
     z-index: 200;
     pointer-events: none;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Heebo', sans-serif;
     letter-spacing: 0.05em;
   }
   .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
@@ -2138,7 +2230,7 @@
     font-size: 13px;
   }
   .stat-row span {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Heebo', sans-serif;
     color: var(--accent);
   }
 
@@ -2167,7 +2259,7 @@
   .cat-pill-filters .filter-icon { font-size: 14px; }
   .cat-pill-filters #filter-badge {
     color: var(--accent);
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Heebo', sans-serif;
     font-size: 10px;
     font-weight: 700;
   }
@@ -2220,7 +2312,7 @@
     margin-bottom: 2px;
   }
   .weather-pill .weather-desc {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Heebo', sans-serif;
     font-size: 9px;
     color: var(--ink-dim);
     text-transform: uppercase;
@@ -2258,7 +2350,7 @@
     border-bottom: none;
   }
   .filter-label {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Heebo', sans-serif;
     font-size: 11px;
     color: var(--ink-dim);
     text-transform: uppercase;
@@ -2387,7 +2479,7 @@
     border: 1.5px solid var(--line);
     background: var(--bg);
     color: var(--ink-dim);
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Heebo', sans-serif;
     font-size: 11px;
     cursor: pointer;
     border-radius: 100px;
@@ -2608,6 +2700,9 @@
         <button class="ob-option" data-value="40">40</button>
         <button class="ob-option" data-value="42">42</button>
         <button class="ob-option" data-value="44">44</button>
+        <button class="ob-option" data-value="46">46</button>
+        <button class="ob-option" data-value="48">48</button>
+        <button class="ob-option" data-value="50">50</button>
       </div>
 
       <h3 class="ob-mini-title">מידת נעליים</h3>
@@ -2625,6 +2720,10 @@
         <button class="ob-option" data-value="45">45</button>
         <button class="ob-option" data-value="46">46</button>
         <button class="ob-option" data-value="47">47</button>
+        <button class="ob-option" data-value="48">48</button>
+        <button class="ob-option" data-value="49">49</button>
+        <button class="ob-option" data-value="50">50</button>
+        <button class="ob-option" data-value="51">51</button>
       </div>
     </div>
 
@@ -2680,16 +2779,13 @@
   <div class="app">
     <header>
       <div class="logo">Wear<span class="amp">&amp;</span>Swipe</div>
-      <div class="header-stats">
-        <div>Likes<span id="hdr-likes">0</span></div>
-        <div>Seen<span id="hdr-seen">0</span></div>
-      </div>
+      <button class="lang-toggle" id="lang-toggle" onclick="toggleLanguage()">EN</button>
     </header>
 
     <div class="tabs">
-      <button class="tab active" data-view="swipe">גלה</button>
-      <button class="tab" data-view="outfits">שילובים<span class="count" id="outfits-count"></span></button>
-      <button class="tab" data-view="profile">פרופיל</button>
+      <button class="tab active" data-view="swipe" data-i18n="tab_discover">גלה</button>
+      <button class="tab" data-view="outfits" data-i18n="tab_outfits">שילובים<span class="count" id="outfits-count"></span></button>
+      <button class="tab" data-view="profile" data-i18n="tab_profile">פרופיל</button>
     </div>
 
     <!-- סרגל סינון מינימליסטי — כפתור יחיד שפותח את כל אפשרויות הסינון -->
@@ -2708,10 +2804,10 @@
         </div>
         <div class="controls">
           <button class="ctrl-btn undo" id="btn-undo" title="חזור למוצר הקודם" onclick="undoSwipe()">↩</button>
-          <button class="ctrl-btn pass" id="btn-pass" title="לא אוהב/ת">✕</button>
-          <button class="ctrl-btn super" id="btn-super" title="סופר לייק! מועדף">★</button>
-          <button class="ctrl-btn info" id="btn-info" title="פרטים">i</button>
           <button class="ctrl-btn like" id="btn-like" title="לייק">♥</button>
+          <button class="ctrl-btn super" id="btn-super" title="סופר לייק! מועדף">★</button>
+          <button class="ctrl-btn pass" id="btn-pass" title="לא אוהב/ת">✕</button>
+          <button class="ctrl-btn info" id="btn-info" title="פרטים">i</button>
         </div>
       </div>
 
@@ -2734,13 +2830,13 @@
           <div class="profile-header">
             <div class="avatar">G</div>
             <h2>גיא חזן</h2>
-            <div class="label" id="profile-label">משתמש פעיל</div>
           </div>
 
-          <div class="stats-grid">
+          <div class="stats-grid stats-grid-4">
             <div class="stat-cell"><div class="num" id="stat-likes">0</div><div class="label">לייקים</div></div>
             <div class="stat-cell"><div class="num" id="stat-favs">0</div><div class="label">מועדפים</div></div>
-            <div class="stat-cell"><div class="num" id="stat-passes">0</div><div class="label">פסחתי</div></div>
+            <div class="stat-cell"><div class="num" id="stat-passes">0</div><div class="label">דילוג</div></div>
+            <div class="stat-cell"><div class="num" id="stat-seen">0</div><div class="label">כל מה שראית</div></div>
           </div>
 
           <div class="section-h">העדפות אישיות</div>
@@ -2823,7 +2919,7 @@
       </div>
 
       <div class="filter-bar" style="margin-top:-12px;flex-wrap:wrap">
-        <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--ink-dim);text-transform:uppercase;letter-spacing:0.1em;margin-left:8px">מותג:</span>
+        <span style="font-family:'Heebo',sans-serif;font-size:10px;color:var(--ink-dim);text-transform:uppercase;letter-spacing:0.1em;margin-left:8px">מותג:</span>
         <button class="brand-chip active" data-brand="all" onclick="setBrandFilter('all')">הכל</button>
         <button class="brand-chip" data-brand="NIKE" onclick="setBrandFilter('NIKE')">Nike</button>
         <button class="brand-chip" data-brand="ADIDAS" onclick="setBrandFilter('ADIDAS')">Adidas</button>
@@ -2923,7 +3019,7 @@
 <div class="modal-bg" id="how-modal">
   <div class="modal" style="max-width:440px">
     <button class="modal-close" onclick="closeHowItWorks()">✕</button>
-    <h3 style="font-family:'Fraunces',serif;font-style:italic;font-size:28px;margin-bottom:6px">איך ה-AI עובד?</h3>
+    <h3 style="font-family:'Heebo',sans-serif;font-style:italic;font-size:28px;margin-bottom:6px">איך ה-AI עובד?</h3>
     <div class="modal-sub" style="margin-bottom:18px">שקיפות מלאה — בלי "קופסה שחורה"</div>
 
     <div class="how-step">
@@ -3000,15 +3096,12 @@
         </button>
         <button class="weather-pill" data-weather="hot">
           <div class="weather-label">חם</div>
-          <div class="weather-desc">קצרים, קלים</div>
         </button>
         <button class="weather-pill" data-weather="mild">
           <div class="weather-label">ביניים</div>
-          <div class="weather-desc">סבירים</div>
         </button>
         <button class="weather-pill" data-weather="cold">
           <div class="weather-label">קר</div>
-          <div class="weather-desc">ארוכים, חמים</div>
         </button>
       </div>
     </div>
@@ -70313,9 +70406,6 @@ function updateSavedOutfitsBadge() {
 function renderProfile() {
   // עדכון שם משתמש
   if (userPrefs.name) {
-    document.getElementById('profile-label').textContent =
-      userPrefs.gender === 'women' ? 'משתמשת פעילה' :
-      userPrefs.gender === 'men' ? 'משתמש פעיל' : 'משתמש/ת פעיל/ה';
     const avatarEl = document.querySelector('.avatar');
     if (avatarEl) avatarEl.textContent = (userPrefs.name[0] || 'U').toUpperCase();
     const h2 = document.querySelector('#view-profile h2');
@@ -70326,6 +70416,8 @@ function renderProfile() {
   document.getElementById('stat-passes').textContent = userState.passedItems.length;
   const favEl = document.getElementById('stat-favs');
   if (favEl) favEl.textContent = userState.favoriteItems.length;
+  const seenEl2 = document.getElementById('stat-seen');
+  if (seenEl2) seenEl2.textContent = userState.likedItems.length + userState.passedItems.length;
   const recsEl = document.getElementById('stat-recs');
   if (recsEl) recsEl.textContent = getRecommendations().length;
 
@@ -70429,7 +70521,7 @@ function renderProfile() {
           <div class="name">${item.name}</div>
           <div class="brand">${item.brand}</div>
         </div>
-        <div class="history-action ${h.action}">${h.action === 'like' ? 'לייק' : '✕ פסחתי'}</div>
+        <div class="history-action ${h.action}">${h.action === 'like' ? 'לייק' : '✕ דילוג'}</div>
       </div>
     `;
   }).join('');
@@ -70462,7 +70554,7 @@ function showInfoModal(id) {
   const shopLink = `<a href="${buyUrl}" target="_blank" rel="noopener" style="display:block;margin-top:16px;padding:14px;background:var(--ink);color:var(--bg);border-radius:100px;text-align:center;text-decoration:none;font-family:'Heebo',sans-serif;font-weight:500;font-size:13px;letter-spacing:0.02em;">${linkLabel} ←</a>`;
   document.getElementById('info-content').innerHTML = `
     <h3>${item.name}</h3>
-    <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink-dim);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:16px;">${item.brand}${item.color ? ' · ' + item.color : ''}</div>
+    <div style="font-family:'Heebo',sans-serif;font-size:11px;color:var(--ink-dim);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:16px;">${item.brand}${item.color ? ' · ' + item.color : ''}</div>
     <div style="width:100%;aspect-ratio:3/4;background:var(--bg-2);border-radius:8px;overflow:hidden;margin-bottom:16px;">
       <img src="${proxyImage(item.img)}"
            onerror="this.onerror=null;this.src='${fallback}'"
@@ -70490,8 +70582,9 @@ document.getElementById('how-modal').addEventListener('click', (e) => {
 });
 
 function updateStats() {
-  document.getElementById('hdr-likes').textContent = userState.likedItems.length;
-  document.getElementById('hdr-seen').textContent = userState.likedItems.length + userState.passedItems.length;
+  const seenCount = userState.likedItems.length + userState.passedItems.length;
+  const seenEl = document.getElementById('stat-seen');
+  if (seenEl) seenEl.textContent = seenCount;
   const recElement = document.getElementById('rec-count');
   if (recElement) {
     const recCount = getRecommendations().length;
@@ -71272,7 +71365,7 @@ function renderOutfits() {
   if (totalLikes < 2) {
     container.innerHTML = `
       <div class="outfits-empty">
-        <h3 style="font-family:'Fraunces',serif;font-size:24px;font-weight:500;margin-bottom:10px">תעשה לפחות 2 לייקים</h3>
+        <h3 style="font-family:'Heebo',sans-serif;font-size:24px;font-weight:500;margin-bottom:10px">תעשה לפחות 2 לייקים</h3>
         <p style="color:var(--ink-dim);font-size:14px;line-height:1.5;max-width:280px;margin-bottom:24px">
           כדי לבנות שילובים מותאמים אישית, אני צריך לראות לפחות 2 פריטים שאתה אוהב — רצוי מקטגוריות שונות.
         </p>
@@ -71290,7 +71383,7 @@ function renderOutfits() {
   if (currentOutfits.length === 0) {
     container.innerHTML = `
       <div class="outfits-empty">
-        <h3 style="font-family:'Fraunces',serif;font-size:24px;font-weight:500;margin-bottom:10px">צריך עוד פריטים</h3>
+        <h3 style="font-family:'Heebo',sans-serif;font-size:24px;font-weight:500;margin-bottom:10px">צריך עוד פריטים</h3>
         <p style="color:var(--ink-dim);font-size:14px;line-height:1.5;max-width:300px">
           הפריטים שאהבת לא מספיקים לבניית שילוב. נסה לאהוב גם חולצה וגם מכנס/חצאית.
         </p>
@@ -71341,32 +71434,60 @@ function renderOutfits() {
               </button>
             </div>
           </div>
-          <div class="outfit-pieces">
-            ${outfit.pieces.map((p, i) => {
-              const fb = makeClothingImage(
-                inferSvgType(p.category, p.name),
-                PALETTES[inferPalette(p)].p,
-                PALETTES[inferPalette(p)].a
-              );
-              const cat = outfit.categories[i] || p.category;
-              const catLabels = {
-                top: 'עליון', bottom: 'תחתון', dress: 'שמלה',
-                outerwear: 'ז\'קט', shoes: 'נעליים', accessory: 'אקססורי'
-              };
-              const isFav = isFavorite(p.id);
-              return `
-                <div class="outfit-piece ${isFav ? 'fav' : ''}" onclick="showInfoModal(${p.id})">
-                  <div class="outfit-piece-cat">${catLabels[cat] || cat}</div>
-                  <div class="outfit-piece-img-wrap">
-                    <img class="outfit-piece-img" src="${proxyImage(p.img)}" onerror="this.onerror=null;this.src='${fb}'" />
-                  </div>
-                  <div class="outfit-piece-info">
-                    <div class="outfit-piece-name">${p.name}</div>
-                    <div class="outfit-piece-price">${p.price}</div>
-                  </div>
+          <div class="outfit-carousel" data-slide="0">
+            <div class="outfit-slides">
+              <div class="outfit-slide">
+                <div class="outfit-pieces">
+                  ${outfit.pieces.map((p, i) => {
+                    const fb = makeClothingImage(
+                      inferSvgType(p.category, p.name),
+                      PALETTES[inferPalette(p)].p,
+                      PALETTES[inferPalette(p)].a
+                    );
+                    const cat = outfit.categories[i] || p.category;
+                    const catLabels = {
+                      top: 'עליון', bottom: 'תחתון', dress: 'שמלה',
+                      outerwear: 'ז\'קט', shoes: 'נעליים', accessory: 'אקססורי'
+                    };
+                    const isFav = isFavorite(p.id);
+                    return `
+                      <div class="outfit-piece ${isFav ? 'fav' : ''}" onclick="showInfoModal(${p.id})">
+                        <div class="outfit-piece-cat">${catLabels[cat] || cat}</div>
+                        <div class="outfit-piece-img-wrap">
+                          <img class="outfit-piece-img" src="${proxyImage(p.img)}" onerror="this.onerror=null;this.src='${fb}'" />
+                        </div>
+                        <div class="outfit-piece-info">
+                          <div class="outfit-piece-name">${p.name}</div>
+                          <div class="outfit-piece-price">${p.price}</div>
+                        </div>
+                      </div>
+                    `;
+                  }).join('')}
                 </div>
-              `;
-            }).join('')}
+              </div>
+              <div class="outfit-slide outfit-slide-full">
+                <div class="outfit-full-title">הלוק המלא</div>
+                <div class="outfit-full-grid" data-count="${outfit.pieces.length}">
+                  ${outfit.pieces.map((p) => {
+                    const fb = makeClothingImage(
+                      inferSvgType(p.category, p.name),
+                      PALETTES[inferPalette(p)].p,
+                      PALETTES[inferPalette(p)].a
+                    );
+                    return `
+                      <div class="outfit-full-item">
+                        <img class="outfit-full-img" src="${proxyImage(p.img)}" onerror="this.onerror=null;this.src='${fb}'" />
+                      </div>
+                    `;
+                  }).join('')}
+                </div>
+              </div>
+            </div>
+            <div class="outfit-dots">
+              <span class="outfit-dot active" onclick="setOutfitSlide(this, 0)"></span>
+              <span class="outfit-dot" onclick="setOutfitSlide(this, 1)"></span>
+            </div>
+            <div class="outfit-swipe-hint">החלק/י לצפייה בלוק המלא ←</div>
           </div>
           <div class="outfit-meta">
             <span>${outfit.pieces.length} פריטים</span>
@@ -71376,6 +71497,41 @@ function renderOutfits() {
       `;
     }).join('')}
   `;
+  attachOutfitSwipe();
+}
+
+/* ===== קרוסלת אווטפיט — מעבר בין "פריטים" ל"לוק מלא" ===== */
+function setOutfitSlide(dotEl, slideIdx) {
+  const carousel = dotEl.closest('.outfit-carousel');
+  if (!carousel) return;
+  carousel.setAttribute('data-slide', slideIdx);
+  carousel.querySelectorAll('.outfit-dot').forEach((d, i) => {
+    d.classList.toggle('active', i === slideIdx);
+  });
+}
+
+// תמיכה בהחלקה (swipe) על קרוסלות האווטפיט
+function attachOutfitSwipe() {
+  document.querySelectorAll('.outfit-carousel').forEach(carousel => {
+    if (carousel.dataset.swipeBound) return;
+    carousel.dataset.swipeBound = '1';
+    let startX = 0, startY = 0, tracking = false;
+    carousel.addEventListener('touchstart', (e) => {
+      startX = e.touches[0].clientX; startY = e.touches[0].clientY; tracking = true;
+    }, {passive: true});
+    carousel.addEventListener('touchend', (e) => {
+      if (!tracking) return;
+      tracking = false;
+      const dx = e.changedTouches[0].clientX - startX;
+      const dy = e.changedTouches[0].clientY - startY;
+      if (Math.abs(dx) < 40 || Math.abs(dy) > Math.abs(dx)) return;
+      const cur = parseInt(carousel.dataset.slide) || 0;
+      // ב-RTL: החלקה שמאלה (dx<0) → קדימה ללוק המלא
+      const next = dx < 0 ? Math.min(1, cur + 1) : Math.max(0, cur - 1);
+      carousel.setAttribute('data-slide', next);
+      carousel.querySelectorAll('.outfit-dot').forEach((d, i) => d.classList.toggle('active', i === next));
+    }, {passive: true});
+  });
 }
 
 function shuffleOutfits() {
@@ -71434,7 +71590,7 @@ function renderSavedOutfits() {
   if (!userState.savedOutfits || userState.savedOutfits.length === 0) {
     container.innerHTML = `
       <div class="outfits-empty">
-        <h3 style="font-family:'Fraunces',serif;font-size:24px;font-weight:500;margin-bottom:10px">עוד לא שמרת אווטפיטים</h3>
+        <h3 style="font-family:'Heebo',sans-serif;font-size:24px;font-weight:500;margin-bottom:10px">עוד לא שמרת אווטפיטים</h3>
         <p style="color:var(--ink-dim);font-size:14px;line-height:1.5;max-width:300px;margin-bottom:24px">
           לך ללשונית "שילובים", מצא אווטפיט שאתה אוהב ולחץ על "שמור".
         </p>
@@ -71488,32 +71644,60 @@ function renderSavedOutfits() {
               </button>
             </div>
           </div>
-          <div class="outfit-pieces">
-            ${outfit.pieces.map((p, i) => {
-              const fb = makeClothingImage(
-                inferSvgType(p.category, p.name),
-                PALETTES[inferPalette(p)].p,
-                PALETTES[inferPalette(p)].a
-              );
-              const cat = outfit.categories[i] || p.category;
-              const catLabels = {
-                top: 'עליון', bottom: 'תחתון', dress: 'שמלה',
-                outerwear: 'ז\'קט', shoes: 'נעליים', accessory: 'אקססורי'
-              };
-              const isFav = isFavorite(p.id);
-              return `
-                <div class="outfit-piece ${isFav ? 'fav' : ''}" onclick="showInfoModal(${p.id})">
-                  <div class="outfit-piece-cat">${catLabels[cat] || cat}</div>
-                  <div class="outfit-piece-img-wrap">
-                    <img class="outfit-piece-img" src="${proxyImage(p.img)}" onerror="this.onerror=null;this.src='${fb}'" />
-                  </div>
-                  <div class="outfit-piece-info">
-                    <div class="outfit-piece-name">${p.name}</div>
-                    <div class="outfit-piece-price">${p.price}</div>
-                  </div>
+          <div class="outfit-carousel" data-slide="0">
+            <div class="outfit-slides">
+              <div class="outfit-slide">
+                <div class="outfit-pieces">
+                  ${outfit.pieces.map((p, i) => {
+                    const fb = makeClothingImage(
+                      inferSvgType(p.category, p.name),
+                      PALETTES[inferPalette(p)].p,
+                      PALETTES[inferPalette(p)].a
+                    );
+                    const cat = outfit.categories[i] || p.category;
+                    const catLabels = {
+                      top: 'עליון', bottom: 'תחתון', dress: 'שמלה',
+                      outerwear: 'ז\'קט', shoes: 'נעליים', accessory: 'אקססורי'
+                    };
+                    const isFav = isFavorite(p.id);
+                    return `
+                      <div class="outfit-piece ${isFav ? 'fav' : ''}" onclick="showInfoModal(${p.id})">
+                        <div class="outfit-piece-cat">${catLabels[cat] || cat}</div>
+                        <div class="outfit-piece-img-wrap">
+                          <img class="outfit-piece-img" src="${proxyImage(p.img)}" onerror="this.onerror=null;this.src='${fb}'" />
+                        </div>
+                        <div class="outfit-piece-info">
+                          <div class="outfit-piece-name">${p.name}</div>
+                          <div class="outfit-piece-price">${p.price}</div>
+                        </div>
+                      </div>
+                    `;
+                  }).join('')}
                 </div>
-              `;
-            }).join('')}
+              </div>
+              <div class="outfit-slide outfit-slide-full">
+                <div class="outfit-full-title">הלוק המלא</div>
+                <div class="outfit-full-grid" data-count="${outfit.pieces.length}">
+                  ${outfit.pieces.map((p) => {
+                    const fb = makeClothingImage(
+                      inferSvgType(p.category, p.name),
+                      PALETTES[inferPalette(p)].p,
+                      PALETTES[inferPalette(p)].a
+                    );
+                    return `
+                      <div class="outfit-full-item">
+                        <img class="outfit-full-img" src="${proxyImage(p.img)}" onerror="this.onerror=null;this.src='${fb}'" />
+                      </div>
+                    `;
+                  }).join('')}
+                </div>
+              </div>
+            </div>
+            <div class="outfit-dots">
+              <span class="outfit-dot active" onclick="setOutfitSlide(this, 0)"></span>
+              <span class="outfit-dot" onclick="setOutfitSlide(this, 1)"></span>
+            </div>
+            <div class="outfit-swipe-hint">החלק/י לצפייה בלוק המלא ←</div>
           </div>
           <div class="outfit-meta">
             <span>${outfit.pieces.length} פריטים</span>
@@ -71523,6 +71707,7 @@ function renderSavedOutfits() {
       `;
     }).join('')}
   `;
+  attachOutfitSwipe();
 }
 
 async function removeSavedOutfit(sig) {
@@ -72142,6 +72327,116 @@ function bindAuthEnter() {
       el.addEventListener('keydown', (e) => { if (e.key === 'Enter') submitAuth(); });
     }
   });
+}
+
+/* ============================================================
+   LANGUAGE / i18n — החלפת שפה עברית ⇄ אנגלית
+   ============================================================
+   מתרגמת את טקסטי הממשק לפי מילון, ומחליפה את כיוון הדף (RTL/LTR).
+   ============================================================ */
+let currentLang = 'he';
+
+// מילון תרגום: מפתח → { he, en }
+const I18N = {
+  tab_discover: { he: 'גלה', en: 'Discover' },
+  tab_outfits:  { he: 'שילובים', en: 'Outfits' },
+  tab_profile:  { he: 'פרופיל', en: 'Profile' },
+};
+
+// מילון תרגום ישיר של מחרוזות נפוצות (טקסט מדויק → אנגלית)
+const STRINGS_HE_EN = {
+  'סינון וקטגוריות': 'Filters & Categories',
+  'נעליים': 'Shoes', 'טישרטים': 'T-Shirts', 'חולצות': 'Shirts',
+  'סוודרים': 'Sweaters', 'מכנסיים': 'Pants', 'שורט': 'Shorts',
+  'שמלות': 'Dresses', "ז'קטים": 'Jackets', 'אקססוריז': 'Accessories', 'הכל': 'All',
+  'סינון מתקדם': 'Advanced Filters',
+  'בחר/י את העדפותיך כדי לראות רק פריטים שמתאימים.': 'Choose your preferences to see only matching items.',
+  'סוג בגד': 'Garment Type', 'מזג אוויר': 'Weather', 'חם': 'Hot', 'קר': 'Cold', 'ביניים': 'Mild',
+  'טווח מחירים:': 'Price range:', 'צבע': 'Color', 'גזרה': 'Fit', 'מותג': 'Brand',
+  'נקה הכל': 'Clear All', 'החל סינון': 'Apply Filters', 'מ-': 'From', 'עד': 'To',
+  'לייקים': 'Likes', 'מועדפים': 'Favorites', 'דילוג': 'Skipped', 'כל מה שראית': 'Total Seen',
+  'העדפות אישיות': 'Personal Preferences', 'וקטור הטעם שלך': 'Your Taste Vector',
+  'המלצות מובילות בשבילך': 'Top Recommendations for You', 'היסטוריה אחרונה': 'Recent History',
+  'איך ה-AI עובד?': 'How does the AI work?', 'ייצוא נתונים': 'Export Data',
+  'ייבוא נתונים': 'Import Data', 'התנתקות': 'Log Out', 'אפס נתוני משתמש': 'Reset User Data',
+  'שילובים מומלצים': 'Recommended Outfits', 'הלוק המלא': 'The Full Look',
+  'שמור': 'Save', 'נשמר ✓': 'Saved ✓', 'שילובים חדשים': 'New Outfits',
+  'תאימות': 'Match', 'פריטים': 'items', 'מחיר': 'Price', 'קטגוריה': 'Category',
+  'לייק': 'Like', 'דילוג ': 'Skip ', 'גלה': 'Discover', 'שילובים': 'Outfits', 'פרופיל': 'Profile',
+  'מחזירים אותך לעמוד הקודם': 'Returning to previous item',
+  'החלק/י לצפייה בלוק המלא ←': 'Swipe to see the full look ←',
+};
+
+function applyLanguage() {
+  const en = currentLang === 'en';
+  // 1. אלמנטים עם data-i18n
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (I18N[key]) {
+      // שמירה על span פנימי (כמו count)
+      const span = el.querySelector('span');
+      el.childNodes[0].nodeValue = I18N[key][currentLang];
+      if (span) el.appendChild(span);
+    }
+  });
+  // תווית בר הסינון
+  const fbl = document.getElementById('filter-bar-label');
+  if (fbl) {
+    const cur = currentCategory || 'all';
+    if (en) {
+      const map = {all:'Filters & Categories', shoes:'Shoes', tee:'T-Shirts', shirt:'Shirts', sweater:'Sweaters', pants:'Pants', shorts:'Shorts', dress:'Dresses', outerwear:'Jackets', accessory:'Accessories'};
+      fbl.textContent = map[cur] || 'Filters & Categories';
+    } else {
+      const map = {all:'סינון וקטגוריות', shoes:'נעליים', tee:'טישרטים', shirt:'חולצות', sweater:'סוודרים', pants:'מכנסיים', shorts:'שורט', dress:'שמלות', outerwear:"ז'קטים", accessory:'אקססוריז'};
+      fbl.textContent = map[cur] || 'סינון וקטגוריות';
+    }
+  }
+  // 2. החלפת כיוון הדף
+  document.documentElement.setAttribute('dir', en ? 'ltr' : 'rtl');
+  document.documentElement.setAttribute('lang', en ? 'en' : 'he');
+  // 3. עדכון תווית הכפתור
+  const btn = document.getElementById('lang-toggle');
+  if (btn) btn.textContent = en ? 'עב' : 'EN';
+  // 4. רענון תצוגות דינמיות
+  if (typeof renderDeck === 'function') renderDeck();
+  if (typeof updateStats === 'function') updateStats();
+}
+
+function toggleLanguage() {
+  currentLang = currentLang === 'he' ? 'en' : 'he';
+  try { localStorage.setItem('wns:lang', currentLang); } catch(e){}
+  applyLanguage();
+  // תרגום טקסטים סטטיים בכל הדף
+  translateStaticTexts();
+}
+
+// תרגום ישיר של צמתי טקסט לפי המילון (סריקה חד-פעמית)
+let _origTexts = null;
+function translateStaticTexts() {
+  const en = currentLang === 'en';
+  if (en) {
+    // שמירת המקור פעם אחת
+    if (!_origTexts) _origTexts = new Map();
+    document.querySelectorAll('.tab, .filter-label, .section-h, .stat-cell .label, .profile-action-btn, .reset-btn, .btn-clear-filters, .btn-apply-filters, .filter-cat-pill, .weather-label, .outfit-full-title, .modal-sub, .filters-modal h3, .outfit-save-btn, .outfit-swipe-hint, .price-input-group label').forEach(el => {
+      const txt = el.textContent.trim();
+      if (STRINGS_HE_EN[txt]) {
+        if (!_origTexts.has(el)) _origTexts.set(el, el.textContent);
+        // החלפת רק צומת הטקסט הראשון אם יש ילדים
+        if (el.children.length === 0) el.textContent = STRINGS_HE_EN[txt];
+        else {
+          for (const node of el.childNodes) {
+            if (node.nodeType === 3 && node.nodeValue.trim() && STRINGS_HE_EN[node.nodeValue.trim()]) {
+              node.nodeValue = STRINGS_HE_EN[node.nodeValue.trim()];
+            }
+          }
+        }
+      }
+    });
+  } else if (_origTexts) {
+    // שחזור המקור
+    _origTexts.forEach((orig, el) => { el.textContent = orig; });
+    _origTexts = null;
+  }
 }
 
 (async function init() {
