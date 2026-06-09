@@ -709,6 +709,48 @@
   }
   .outfit-full-grid[data-count="3"],
   .outfit-full-grid[data-count="5"] { grid-template-columns: repeat(3, 1fr); }
+  /* ===== בובת ראווה ===== */
+  .mannequin {
+    position: relative;
+    width: 100%;
+    max-width: 280px;
+    margin: 0 auto;
+    aspect-ratio: 200 / 460;
+  }
+  .mannequin-body {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .mq-item {
+    position: absolute;
+    cursor: pointer;
+    border-radius: 8px;
+    overflow: hidden;
+    background: var(--bg);
+    box-shadow: 0 3px 10px rgba(0,0,0,0.12);
+    border: 1px solid var(--line);
+    transition: transform 0.2s;
+  }
+  .mq-item:hover { transform: scale(1.06); z-index: 5; }
+  .mq-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .mq-item span {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    font-size: 9px;
+    text-align: center;
+    background: rgba(0,0,0,0.55);
+    color: #fff;
+    padding: 1px 0;
+  }
+  /* מיקום אנטומי */
+  .mq-torso { top: 16%; left: 27%; width: 46%; aspect-ratio: 3/3.4; }
+  .mq-dress { top: 16%; left: 27%; width: 46%; aspect-ratio: 3/5; }
+  .mq-legs  { top: 50%; left: 30%; width: 40%; aspect-ratio: 3/4; }
+  .mq-feet  { top: 85%; left: 33%; width: 34%; aspect-ratio: 3/2; }
+  .mq-outer { top: 17%; left: 2%;  width: 27%; aspect-ratio: 3/4; opacity: 0.97; }
+  .mq-acc   { top: 60%; left: 4%;  width: 22%; aspect-ratio: 1/1; }
   .outfit-full-item {
     aspect-ratio: 3/4;
     background: var(--bg-2);
@@ -947,6 +989,44 @@
     border: 1px solid var(--line);
   }
 
+  .section-sub { font-size: 11px; color: var(--ink-dim); font-weight: 400; }
+  .favorites-gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-bottom: 28px;
+  }
+  .fav-card {
+    border-radius: 10px;
+    overflow: hidden;
+    background: var(--bg-2);
+    border: 1px solid var(--line);
+    cursor: pointer;
+    position: relative;
+    aspect-ratio: 3/4;
+    transition: transform 0.2s;
+  }
+  .fav-card:hover { transform: translateY(-3px); box-shadow: 0 6px 16px rgba(0,0,0,0.12); }
+  .fav-card img { width: 100%; height: 100%; object-fit: cover; }
+  .fav-card .fav-star {
+    position: absolute; top: 6px; right: 6px;
+    background: #f5b400; color: #fff;
+    width: 20px; height: 20px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px;
+  }
+  .fav-card .fav-price {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    background: rgba(0,0,0,0.6); color: #fff;
+    font-size: 11px; text-align: center; padding: 3px 0;
+  }
+  .favorites-empty {
+    grid-column: 1 / -1;
+    text-align: center;
+    color: var(--ink-dim);
+    font-size: 13px;
+    padding: 24px 0;
+  }
   .top-recs {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -1343,11 +1423,17 @@
   .controls {
     padding: 16px 24px 28px;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    gap: 18px;
     border-top: 1px solid var(--line);
     background: var(--bg);
+  }
+  .controls-main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    flex: 1;
   }
   .ctrl-btn {
     width: 56px;
@@ -1383,7 +1469,6 @@
     width: 42px;
     height: 42px;
     font-size: 13px;
-    margin-right: auto;   /* דוחף את כפתור המידע לקצה השמאלי (RTL) */
   }
   .ctrl-btn.undo {
     width: 42px;
@@ -2804,9 +2889,11 @@
         </div>
         <div class="controls">
           <button class="ctrl-btn undo" id="btn-undo" title="חזור למוצר הקודם" onclick="undoSwipe()">↩</button>
-          <button class="ctrl-btn like" id="btn-like" title="לייק">♥</button>
-          <button class="ctrl-btn super" id="btn-super" title="סופר לייק! מועדף">★</button>
-          <button class="ctrl-btn pass" id="btn-pass" title="לא אוהב/ת">✕</button>
+          <div class="controls-main">
+            <button class="ctrl-btn like" id="btn-like" title="לייק">♥</button>
+            <button class="ctrl-btn super" id="btn-super" title="סופר לייק! מועדף">★</button>
+            <button class="ctrl-btn pass" id="btn-pass" title="לא אוהב/ת">✕</button>
+          </div>
           <button class="ctrl-btn info" id="btn-info" title="פרטים">i</button>
         </div>
       </div>
@@ -2851,6 +2938,9 @@
               <span id="vec-dim">dim: 0/16</span>
             </div>
           </div>
+
+          <div class="section-h">המועדפים שלי <span class="section-sub">(סופר-לייק ★)</span></div>
+          <div class="favorites-gallery" id="favorites-gallery"></div>
 
           <div class="section-h">המלצות מובילות בשבילך</div>
           <div class="top-recs" id="top-recs"></div>
@@ -70245,12 +70335,11 @@ async function finishSwipe(action) {
   if (action === 'like' || action === 'super') {
     updateUserVector();
     const totalLikes = userState.likedItems.length;
+    // בנייה מחדש של התור רק במדרגות מסוימות של למידה — לא על כל פעולה.
+    // (בנייה מחדש על כל סופר-לייק גרמה ל"קפיצה"/גליץ' של הכרטיס הבא).
     if (totalLikes === 3) {
       needsRebuild = true;
-    } else if (totalLikes > 3 && totalLikes % 5 === 0) {
-      needsRebuild = true;
-    }
-    if (action === 'super') {
+    } else if (totalLikes > 3 && totalLikes % 8 === 0) {
       needsRebuild = true;
     }
   }
@@ -70258,17 +70347,22 @@ async function finishSwipe(action) {
   await saveUserState();
   updateStats();
 
-  // המתנה לסיום האנימציה — ואז בנייה מחדש נקייה של ה-deck
+  // המתנה לסיום האנימציה — ואז עדכון נקי של ה-deck
   setTimeout(() => {
     top.remove();
 
+    // אם צריך בנייה מחדש (מדרגת למידה) — נשמר הפריט הנוכחי כדי למנוע קפיצה
     if (needsRebuild) {
-      // בניית תור חדש לפי הוקטור המעודכן — מסירה את כל מה שנראה
+      const currentTopId = userState.queue[userState.currentIndex]
+        ? userState.queue[userState.currentIndex].id : null;
       buildQueue();
+      // אם הפריט שהיה אמור להופיע קיים בתור החדש — נדלג אליו כדי לשמור רצף
+      if (currentTopId !== null) {
+        const idx = userState.queue.findIndex(i => i.id === currentTopId);
+        if (idx >= 0) userState.currentIndex = idx;
+      }
       renderDeck();
     } else {
-      // קידום נקי: בונים מחדש את ה-deck מהמיקום הנוכחי בתור.
-      // זה מבטיח סנכרון מלא בין ה-DOM למצב, ומונע כרטיסים תקועים או כפילויות.
       if (userState.currentIndex >= userState.queue.length) {
         buildQueue();
       }
@@ -70468,6 +70562,32 @@ function renderProfile() {
     ).join('');
     document.getElementById('vec-status').textContent = userPrefs.styles?.length ? 'מבוסס העדפות סגנון' : 'טרם נלמד טעם';
     document.getElementById('vec-dim').textContent = 'dim: 0/16';
+  }
+
+  // המועדפים שלי (סופר-לייק)
+  const favGallery = document.getElementById('favorites-gallery');
+  if (favGallery) {
+    const favs = (userState.favoriteItems || [])
+      .map(id => catalog.find(c => c.id === id))
+      .filter(Boolean);
+    if (favs.length === 0) {
+      favGallery.innerHTML = '<div class="favorites-empty">עדיין אין מועדפים. עשה/י סופר-לייק (★) לפריט כדי לשמור אותו כאן.</div>';
+    } else {
+      favGallery.innerHTML = favs.map(item => {
+        const fb = makeClothingImage(
+          inferSvgType(item.category, item.name),
+          PALETTES[inferPalette(item)].p,
+          PALETTES[inferPalette(item)].a
+        );
+        return `
+          <div class="fav-card" onclick="showInfoModal(${item.id})">
+            <div class="fav-star">★</div>
+            <img src="${proxyImage(item.img)}" onerror="this.onerror=null;this.src='${fb}'" />
+            <div class="fav-price">${item.price}</div>
+          </div>
+        `;
+      }).join('');
+    }
   }
 
   // המלצות מובילות
@@ -71251,6 +71371,29 @@ function buildOutfits() {
     });
   });
 
+  // === ניקוי כפילויות: כל אווטפיט מכיל פריט אחד בלבד מכל קטגוריה ===
+  // הגנה אחרונה מפני מצב של שני פריטים מאותו סוג (למשל 2 זוגות נעליים).
+  outfits.forEach(outfit => {
+    const seenCats = new Set();
+    const seenIds = new Set();
+    const cleanPieces = [];
+    const cleanCats = [];
+    outfit.pieces.forEach((p, i) => {
+      const cat = outfit.categories[i] || p.category;
+      // נורמליזציה: כל סוגי העליון נחשבים לאותה משבצת "עליון"
+      const slot = ['tee', 'top', 'shirt', 'sweater'].includes(p.category) ? 'top'
+                 : ['pants', 'shorts', 'skirt'].includes(p.category) ? 'bottom'
+                 : p.category;
+      if (seenCats.has(slot) || seenIds.has(p.id)) return; // דלג על כפילות
+      seenCats.add(slot);
+      seenIds.add(p.id);
+      cleanPieces.push(p);
+      cleanCats.push(cat);
+    });
+    outfit.pieces = cleanPieces;
+    outfit.categories = cleanCats;
+  });
+
   // === דירוג סופי: שילוב של תאימות וקטורית + הרמוניית צבעים + favorites ===
   outfits.forEach(outfit => {
     if (outfit.pieces.length < 2) {
@@ -71310,7 +71453,11 @@ function buildOutfits() {
 // בחירת הפריט הכי משלים אסתטית מתוך רשימה לאווטפיט קיים
 function pickBestComplement(candidates, existingPieces) {
   if (candidates.length === 0) return null;
+  const existingIds = new Set(existingPieces.map(p => p.id));
+  const existingCats = new Set(existingPieces.map(p => p.category));
   const ranked = candidates
+    // אל תציע פריט שכבר נמצא באווטפיט, או פריט מקטגוריה שכבר קיימת
+    .filter(c => !existingIds.has(c.id) && !existingCats.has(c.category))
     .map(c => {
       // ציון = ממוצע הרמוניית צבעים עם הפריטים הקיימים
       let total = 0;
@@ -71321,6 +71468,7 @@ function pickBestComplement(candidates, existingPieces) {
     })
     .sort((a, b) => b.score - a.score);
 
+  if (ranked.length === 0) return null;
   // אם הפריט הכי טוב הוא ממש לא מתאים — אל תוסיף אותו
   if (ranked[0].score < 0.55) return null;
 
@@ -71466,21 +71614,8 @@ function renderOutfits() {
                 </div>
               </div>
               <div class="outfit-slide outfit-slide-full">
-                <div class="outfit-full-title">הלוק המלא</div>
-                <div class="outfit-full-grid" data-count="${outfit.pieces.length}">
-                  ${outfit.pieces.map((p) => {
-                    const fb = makeClothingImage(
-                      inferSvgType(p.category, p.name),
-                      PALETTES[inferPalette(p)].p,
-                      PALETTES[inferPalette(p)].a
-                    );
-                    return `
-                      <div class="outfit-full-item">
-                        <img class="outfit-full-img" src="${proxyImage(p.img)}" onerror="this.onerror=null;this.src='${fb}'" />
-                      </div>
-                    `;
-                  }).join('')}
-                </div>
+                <div class="outfit-full-title">הלוק המלא על הגוף</div>
+                ${renderMannequin(outfit)}
               </div>
             </div>
             <div class="outfit-dots">
@@ -71498,6 +71633,64 @@ function renderOutfits() {
     }).join('')}
   `;
   attachOutfitSwipe();
+}
+
+/* ===== תצוגת בובת ראווה — הפריטים ממוקמים אנטומית על דמות ===== */
+function renderMannequin(outfit) {
+  // מיפוי כל פריט למשבצת אנטומית
+  const slotOf = (cat) => {
+    if (['tee', 'top', 'shirt', 'sweater'].includes(cat)) return 'torso';
+    if (['pants', 'shorts', 'skirt'].includes(cat)) return 'legs';
+    if (cat === 'dress') return 'dress';
+    if (cat === 'outerwear') return 'outer';
+    if (cat === 'shoes') return 'feet';
+    if (cat === 'accessory') return 'acc';
+    return 'acc';
+  };
+  const bySlot = {};
+  outfit.pieces.forEach((p) => { bySlot[slotOf(p.category)] = p; });
+
+  const imgFor = (p) => {
+    if (!p) return null;
+    const fb = makeClothingImage(
+      inferSvgType(p.category, p.name),
+      PALETTES[inferPalette(p)].p,
+      PALETTES[inferPalette(p)].a
+    );
+    return `<img src="${proxyImage(p.img)}" onerror="this.onerror=null;this.src='${fb}'" />`;
+  };
+
+  // בובת ראווה: silhouette של גוף ללא פנים, והפריטים ממוקמים מעליה
+  return `
+    <div class="mannequin">
+      <svg class="mannequin-body" viewBox="0 0 200 460" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <!-- ראש (ללא פנים) -->
+        <circle cx="100" cy="40" r="26" fill="var(--line)"/>
+        <!-- צוואר -->
+        <rect x="90" y="62" width="20" height="18" fill="var(--line)"/>
+        <!-- פלג גוף עליון -->
+        <path d="M60 80 L140 80 L150 150 L138 250 L62 250 L50 150 Z" fill="var(--line)" opacity="0.55"/>
+        <!-- זרועות -->
+        <path d="M60 84 L38 180 L52 184 L72 100 Z" fill="var(--line)" opacity="0.45"/>
+        <path d="M140 84 L162 180 L148 184 L128 100 Z" fill="var(--line)" opacity="0.45"/>
+        <!-- רגליים -->
+        <rect x="64" y="250" width="32" height="150" rx="10" fill="var(--line)" opacity="0.5"/>
+        <rect x="104" y="250" width="32" height="150" rx="10" fill="var(--line)" opacity="0.5"/>
+      </svg>
+
+      <!-- ז'קט (שכבה אחורית, צד ימין) -->
+      ${bySlot.outer ? `<div class="mq-item mq-outer" onclick="showInfoModal(${bySlot.outer.id})">${imgFor(bySlot.outer)}<span>ז'קט</span></div>` : ''}
+      <!-- עליון / שמלה -->
+      ${bySlot.torso ? `<div class="mq-item mq-torso" onclick="showInfoModal(${bySlot.torso.id})">${imgFor(bySlot.torso)}</div>` : ''}
+      ${bySlot.dress ? `<div class="mq-item mq-dress" onclick="showInfoModal(${bySlot.dress.id})">${imgFor(bySlot.dress)}</div>` : ''}
+      <!-- תחתון -->
+      ${bySlot.legs ? `<div class="mq-item mq-legs" onclick="showInfoModal(${bySlot.legs.id})">${imgFor(bySlot.legs)}</div>` : ''}
+      <!-- נעליים -->
+      ${bySlot.feet ? `<div class="mq-item mq-feet" onclick="showInfoModal(${bySlot.feet.id})">${imgFor(bySlot.feet)}</div>` : ''}
+      <!-- אקססורי (צד) -->
+      ${bySlot.acc ? `<div class="mq-item mq-acc" onclick="showInfoModal(${bySlot.acc.id})">${imgFor(bySlot.acc)}<span>אקססורי</span></div>` : ''}
+    </div>
+  `;
 }
 
 /* ===== קרוסלת אווטפיט — מעבר בין "פריטים" ל"לוק מלא" ===== */
@@ -71676,21 +71869,8 @@ function renderSavedOutfits() {
                 </div>
               </div>
               <div class="outfit-slide outfit-slide-full">
-                <div class="outfit-full-title">הלוק המלא</div>
-                <div class="outfit-full-grid" data-count="${outfit.pieces.length}">
-                  ${outfit.pieces.map((p) => {
-                    const fb = makeClothingImage(
-                      inferSvgType(p.category, p.name),
-                      PALETTES[inferPalette(p)].p,
-                      PALETTES[inferPalette(p)].a
-                    );
-                    return `
-                      <div class="outfit-full-item">
-                        <img class="outfit-full-img" src="${proxyImage(p.img)}" onerror="this.onerror=null;this.src='${fb}'" />
-                      </div>
-                    `;
-                  }).join('')}
-                </div>
+                <div class="outfit-full-title">הלוק המלא על הגוף</div>
+                ${renderMannequin(outfit)}
               </div>
             </div>
             <div class="outfit-dots">
