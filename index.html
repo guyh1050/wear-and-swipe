@@ -1276,6 +1276,7 @@
   .controls {
     padding: 16px 24px 28px;
     display: flex;
+    direction: ltr;            /* סדר הכפתורים נקבע משמאל לימין לפי סדר ה-DOM */
     justify-content: center;
     align-items: center;
     gap: 18px;
@@ -1299,9 +1300,9 @@
   .ctrl-btn:hover { transform: scale(1.05); }
   .ctrl-btn:active { transform: scale(0.95); }
   .ctrl-btn:disabled { opacity: 0.3; cursor: not-allowed; }
-  .ctrl-btn.pass { border-color: var(--accent); color: var(--accent); }
+  .ctrl-btn.pass { border-color: var(--accent); color: var(--accent); width: 60px; height: 60px; }
   .ctrl-btn.pass:hover:not(:disabled) { background: var(--accent); color: var(--bg); }
-  .ctrl-btn.like { border-color: var(--green); color: var(--green); width: 64px; height: 64px; }
+  .ctrl-btn.like { border-color: var(--green); color: var(--green); width: 60px; height: 60px; }
   .ctrl-btn.like:hover:not(:disabled) { background: var(--green); color: var(--bg); }
   .ctrl-btn.info { width: 44px; height: 44px; font-size: 14px; }
   .ctrl-btn.undo {
@@ -1315,8 +1316,8 @@
   .ctrl-btn.super {
     border-color: #f5b400;
     color: #f5b400;
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 60px;
     font-size: 22px;
   }
   .ctrl-btn.super:hover:not(:disabled) {
@@ -2707,11 +2708,11 @@
           <div class="deck" id="deck"></div>
         </div>
         <div class="controls">
-          <button class="ctrl-btn undo" id="btn-undo" title="חזור למוצר הקודם" onclick="undoSwipe()">↩</button>
+          <button class="ctrl-btn info" id="btn-info" title="פרטים">i</button>
           <button class="ctrl-btn pass" id="btn-pass" title="לא אוהב/ת">✕</button>
           <button class="ctrl-btn super" id="btn-super" title="סופר לייק! מועדף">★</button>
-          <button class="ctrl-btn info" id="btn-info" title="פרטים">i</button>
           <button class="ctrl-btn like" id="btn-like" title="לייק">♥</button>
+          <button class="ctrl-btn undo" id="btn-undo" title="חזור למוצר הקודם" onclick="undoSwipe()">↩</button>
         </div>
       </div>
 
