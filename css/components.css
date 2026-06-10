@@ -1,0 +1,136 @@
+/* ============================================================
+   components.css — רכיבים: כפתורים, כרטיסים, מודלים, טפסים
+   ============================================================ */
+
+/* --- מסך אימות --- */
+.auth-screen {
+  position: fixed; inset: 0;
+  background: var(--bg);
+  z-index: 400;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 24px;
+}
+.auth-box { width: 100%; max-width: 360px; text-align: center; }
+.auth-logo { font-size: 38px; font-weight: 800; margin-bottom: 4px; }
+.auth-logo .amp { color: var(--accent); }
+.auth-tagline { color: var(--ink-dim); font-size: 15px; margin-bottom: 32px; }
+.auth-tabs {
+  display: flex; gap: 4px;
+  background: var(--bg-2);
+  border-radius: 100px;
+  padding: 4px;
+  margin-bottom: 24px;
+}
+.auth-tab {
+  flex: 1; padding: 11px;
+  border: none; background: transparent;
+  color: var(--ink-dim); font-size: 14px; font-weight: 600;
+  cursor: pointer; border-radius: 100px;
+}
+.auth-tab.active { background: var(--ink); color: #fff; }
+.auth-field { margin-bottom: 14px; text-align: right; }
+.auth-field label { display: block; font-size: 12px; color: var(--ink-dim); margin-bottom: 6px; }
+.auth-input {
+  width: 100%; padding: 13px 16px;
+  border: 1.5px solid var(--line);
+  background: var(--bg);
+  border-radius: 12px;
+  font-size: 16px; color: var(--ink);
+  text-align: right;
+}
+.auth-input:focus { outline: none; border-color: var(--accent); }
+.auth-submit {
+  width: 100%; padding: 14px;
+  border: none; background: var(--ink); color: #fff;
+  font-size: 15px; font-weight: 600;
+  cursor: pointer; border-radius: 100px;
+  margin-top: 8px;
+}
+.auth-submit:hover { background: var(--accent); }
+.auth-error { color: var(--accent); font-size: 13px; margin-top: 12px; min-height: 18px; }
+
+/* --- כרטיס פריט (סווייפ) --- */
+.deck { position: relative; height: 520px; margin: 20px; }
+.card {
+  position: absolute; inset: 0;
+  background: var(--box);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+  border: 1px solid var(--line);
+}
+.card-img { width: 100%; height: 74%; object-fit: cover; background: var(--bg-2); }
+.card-info { padding: 14px 18px; }
+.card-brand { font-size: 11px; color: var(--ink-dim); letter-spacing: 0.1em; }
+.card-name { font-size: 18px; font-weight: 600; margin: 2px 0; }
+.card-price { font-size: 17px; color: var(--accent); font-weight: 700; }
+
+/* --- כפתורי בקרה --- */
+.controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px 28px;
+}
+.controls-main { display: flex; gap: 18px; align-items: center; flex: 1; justify-content: center; }
+.ctrl-btn {
+  border-radius: 50%;
+  border: 1.5px solid var(--ink);
+  background: var(--bg);
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: transform 0.15s;
+}
+.ctrl-btn:hover { transform: scale(1.06); }
+.ctrl-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+.ctrl-btn.like { width: 60px; height: 60px; border-color: var(--green); color: var(--green); font-size: 24px; }
+.ctrl-btn.pass { width: 60px; height: 60px; border-color: var(--accent); color: var(--accent); font-size: 22px; }
+.ctrl-btn.super { width: 60px; height: 60px; border-color: var(--gold); color: var(--gold); font-size: 24px; }
+.ctrl-btn.info { width: 42px; height: 42px; font-size: 14px; }
+.ctrl-btn.undo { width: 42px; height: 42px; font-size: 17px; border-color: var(--ink-dim); color: var(--ink-dim); }
+
+/* --- מודל --- */
+.modal-bg {
+  position: fixed; inset: 0;
+  background: rgba(26,24,20,0.6);
+  z-index: 500;
+  display: none;
+  align-items: center; justify-content: center;
+  padding: 20px;
+}
+.modal-bg.show { display: flex; }
+.modal {
+  background: var(--bg);
+  border-radius: 18px;
+  padding: 24px;
+  max-width: 380px; width: 100%;
+  max-height: 88vh; overflow-y: auto;
+  position: relative;
+}
+.modal-close {
+  position: absolute; top: 14px; left: 14px;
+  width: 32px; height: 32px; border-radius: 50%;
+  border: 1px solid var(--line); background: var(--bg);
+  cursor: pointer; font-size: 14px;
+}
+
+/* --- toast --- */
+.toast {
+  position: fixed; bottom: 30px; left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background: var(--ink); color: #fff;
+  padding: 12px 22px; border-radius: 100px;
+  font-size: 14px; z-index: 600;
+  transition: transform 0.3s; opacity: 0;
+}
+.toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+
+/* --- כפתור שפה --- */
+.lang-toggle {
+  border: 1.5px solid var(--line); background: var(--bg-2);
+  color: var(--ink); font-size: 12px; font-weight: 700;
+  width: 42px; height: 30px; border-radius: 100px; cursor: pointer;
+}
