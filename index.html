@@ -70162,9 +70162,9 @@ async function finishSwipe(action) {
     } else if (totalLikes > 3 && totalLikes % 5 === 0) {
       needsRebuild = true;
     }
-    if (action === 'super') {
-      needsRebuild = true;
-    }
+    // הערה: סופר-לייק כבר נספר ב-likedItems, ולכן מפעיל בנייה מחדש
+    // באותן אבני-דרך כמו לייק רגיל. אין צורך לבנות מחדש בכל סופר-לייק
+    // (זה גרם לכרטיס הבא "לקפוץ" כי התור הוגרל מחדש מתחת לכרטיס שכבר הוצג).
   }
 
   await saveUserState();
@@ -70175,8 +70175,20 @@ async function finishSwipe(action) {
     top.remove();
 
     if (needsRebuild) {
-      // בניית תור חדש לפי הוקטור המעודכן — מסירה את כל מה שנראה
+      // שמירת הפריט שכבר מוצג בחזית, כדי שלא "יקפוץ" אחרי הבנייה מחדש:
+      // buildQueue מגריל תור חדש ומאפס currentIndex, אז נמצא את אותו פריט
+      // בתור החדש ונחזיר אותו לראש. כך הכרטיס שמוצג נשאר זהה, ורק
+      // הכרטיסים שמאחוריו מתעדכנים לפי הוקטור החדש.
+      const frontItem = userState.queue[userState.currentIndex];
+      const frontId = frontItem ? frontItem.id : null;
       buildQueue();
+      if (frontId != null) {
+        const idx = userState.queue.findIndex(it => it.id === frontId);
+        if (idx > 0) {
+          const [keep] = userState.queue.splice(idx, 1);
+          userState.queue.unshift(keep);
+        }
+      }
       renderDeck();
     } else {
       // קידום נקי: בונים מחדש את ה-deck מהמיקום הנוכחי בתור.
