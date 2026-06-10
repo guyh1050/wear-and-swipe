@@ -1,0 +1,23 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // נתוני משתמש — כל אחד ניגש רק למסמך שלו
+    match /users/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+
+    // קטלוג — קריאה לכל מאומת, כתיבה רק למנהל (guy)
+    match /catalog/{itemId} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null
+                   && request.auth.token.email == 'guy@wns.app';
+    }
+
+    // ברירת מחדל — חסימה
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
